@@ -4,6 +4,10 @@ import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from 'react-redux';
+import  store from './components/store/index';
+import Table from './components/table'
 
 import AppNavigator from './navigation/AppNavigator';
 
@@ -21,8 +25,13 @@ export default function App(props) {
   } else {
     return (
       <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+         <Provider store={store}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            
         <AppNavigator />
+     
+    </Provider>
+        
       </View>
     );
   }
