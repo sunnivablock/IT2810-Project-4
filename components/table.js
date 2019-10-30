@@ -1,34 +1,46 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Table, Row, Rows } from 'react-native-table-component';
-
+import getActors from './data'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import fetchActorsAction from './fetchActors'
+import {
+  Image,
+  Platform,
+  ScrollView,
+  
+  Text,
+  TouchableOpacity,
+  
+} from 'react-native';
 import {getActorsError, getActorsPending} from './reducers/reducer'
 
-class Table1 extends Component {
+export default class Table1 extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tableHead: ['Rating', 'First Name', 'Last Name', 'Year'],
       tableData: [
-        ['10', '', 'Hemsworth', '1986'],
-        ['9', 'Channing', 'Tatum', '1983'],
-        ['8', 'Michael', 'Jordannnn', '1981'],
-        ['7', 'Brad', 'Pitt', '1967']
+        [10, 'Channing', 'Tatum', 1986],
+        [9, 'Brad', 'Pitt', 1964],
+        [8, 'James', 'Bond', 1972],
+        [7, 'Channing', 'Tatum', 1976],      
+
       ]
+      
+      
+      //getActors()
     }
   }
 
-  componentDidMount(){
-    const {fetchActors}=this.props;
-    fetchActors('http://it2810-09.idi.ntnu.no:8000/api/persons?sort=rating')
-  }
+
 
   render() {
     const state = this.state;
+    console.log(getActors())
     return (
+
       <View style={styles.container}>
         <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
           <Row data={state.tableHead} style={styles.head} textStyle={styles.text}/>
@@ -39,27 +51,7 @@ class Table1 extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-  actors: state.actors.actors,
-  //topactors: state.topactors.topactors,
-  //error: getActorsError(state),
- // pending: getActorsPending(state),
-  //values: state.values.values
- 
-}}
 
- 
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchActors: fetchActorsAction,
-  //fetchTopActors: fetchTopActorsAction
-}, dispatch)
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Table1);
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#282c34' },
