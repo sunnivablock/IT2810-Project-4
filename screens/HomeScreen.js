@@ -4,6 +4,8 @@ import React from 'react';
 import FormContainer from '../components/FormContainer'
 import Header from '../components/header'
 import Table from '../components/table'
+import getActors from '../components/data'
+import Initializer from '../components/initializer'
 import {
   Image,
   Platform,
@@ -17,12 +19,14 @@ import {
 import { MonoText } from '../components/StyledText';
 
 export default function HomeScreen() {
+  //if(!this.shouldComponentRender()) return (<div>Appen laster ikke</div>) Må ha inn noe så appen ikke laster før vi har fått data
   return (
+    getActors(),
     <View style={styles.container}>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
-
+      <Initializer/>
       <Header/>
       <Table/>
 
