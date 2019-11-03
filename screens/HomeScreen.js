@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
+import { TextInput } from 'react-native-gesture-handler';
 
 export default function HomeScreen() {
   //if(!this.shouldComponentRender()) return (<div>Appen laster ikke</div>) Må ha inn noe så appen ikke laster før vi har fått data
@@ -26,10 +27,10 @@ export default function HomeScreen() {
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
-      <Initializer/>
-      <Header/>
-      <Table/>
-
+        <Initializer/>
+        <Header/>
+        <Table/>
+        <FormContainer/>
       </ScrollView>
 
       <View style={styles.tabBarInfoContainer}>
@@ -40,7 +41,7 @@ export default function HomeScreen() {
         <View
           style={[styles.codeHighlightContainer, styles.navigationFilename]}>
           <MonoText style={styles.codeHighlightText}>
-            navigation/MainTabNavigator.js
+            navigation/MainTabNavigator.js Heisann sveisann
           </MonoText>
         </View>
       </View>

@@ -3,8 +3,10 @@ import {
   Image,
   Platform,
   ScrollView,
+  Button,
   StyleSheet,
   Text,
+  Picker,
   TouchableOpacity,
   View,
   
@@ -13,9 +15,9 @@ import {
 //import axios from 'axios';
 
 /* Import Components; These are our dumb components. They are stateless functional components. */
-import Button from './Button'
-import Input from './Input'; 
-import Select from './Select';
+//import Button from './Button'
+import InputField from './TextInput'; 
+//import Picker from './Picker';
 
 
 class FormContainer extends Component {  
@@ -32,7 +34,7 @@ class FormContainer extends Component {
       },
     }
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleClearForm = this.handleClearForm.bind(this);
+    //this.handleClearForm = this.handleClearForm.bind(this);
     this.handleAge = this.handleAge.bind(this);
     this.handleFirstName = this.handleFirstName.bind(this);
     this.handleLastName = this.handleLastName.bind(this);
@@ -105,20 +107,19 @@ class FormContainer extends Component {
   handleFormSubmit = () => {
     let personData = this.state.newPerson;
     console.log(personData)
+    console.log("submit button pushed")
     //axios.post('http://it2810-09.idi.ntnu.no:8000/api/persons?', personData)
       //.then(response => {
         //response.then(data =>{
         //console.log("Successful" + data);
       //})
      // })
-      .catch(err => {
-        return console.log(err+'Could not post to db.');
-      })
+      
   }
-
+/*
   handleClearForm(e) {
     // Logic for resetting the form
-    e.preventDefault(); //prevents the page from being refreshed on form submission, which is the default form behavior.
+    console.log("clear button pushed")
     this.setState({ 
       newPerson: {
         firstName: '',
@@ -128,80 +129,115 @@ class FormContainer extends Component {
         rating: ''
       },
     })
-}
+}*/
 
 render() {
   const { firstName, lastName, profession, year, rating } = this.state.newPerson;
   const isEnabled = (firstName !=="" && lastName !=="" && profession !=="" && year !=="" && rating !=="");
-  
+  console.log("inni render til formcontainer")
   return (
-      <View /*className="formContainer"*/>
-        <Text /*className='formHeader'*/>ADD NEW PERSON</Text>
+      <View style={styles.container}>
+      <Text style={styles.newPersonHeadline}>ADD NEW PERSON</Text>
+      <Text style={styles.inputContainer}>
         
-        <Input 
-          inputType={'text'}
-          //className={'firstNameInput'}
+        <InputField 
           title= {'First name '} 
           name= {'firstName'}
           value={this.state.newPerson.firstName} 
           placeholder = {'John'}
-          handleChange = {this.handleFirstName}/> {/* First name of the user */}
+          onChange = {this.handleFirstName}/> {/* First name of the user */}
         
-        <Input 
-          inputType={'text'}
-          //className={'lastNameInput'}
+        <InputField 
           title= {'Last name '} 
           name= {'lastName'}
           value={this.state.newPerson.lastName} 
           placeholder = {'Smith'}
-          handleChange = {this.handleLastName}/> {/* Last name of the user */}
+          onChange = {this.handleLastName}/> {/* Last name of the user */}
 
-        <Input 
-          inputType={'number'} 
+        <InputField 
           name={'age'}
-          //className={'ageInput'}
           title= {'Birth year '} 
-          maxLength = {'4'}
+          maxLength = {4}
           value={this.state.newPerson.age} 
           placeholder = {'1900'}
-          handleChange={this.handleAge} /> {/* Age */} 
+          onChange={this.handleAge} /> {/* Age */} 
         
-        <Input 
-          inputType={'text'} 
-          //className={'professionInput'}
+        <InputField 
           name={'profession'}
           title= {'Profession '} 
           value={this.state.newPerson.profession} 
           placeholder = {'Pimp'}
-          handleChange={this.handleProfession} /> {/* Profession */} 
+          onChange={this.handleProfession} /> {/* Profession */} 
         
-        <Select 
-          title={'Rating'}
-          //className={'ratingInput'}
-          name={'rating'}
-          options = {this.addRatingOptions()} 
-          value = {this.state.newPerson.rating}
-          placeholder = {'55'}
-          handleChange = {this.handleRating}
-          /> {/* Rating selection */}
+        <Picker
+          selectedValue={this.state.newPerson.rating}
+          onValueChange={this.handleRating}
+          >
+        <Picker.Item label="Java" value="java" />
+        <Picker.Item label="JavaScript" value="js" />
+      </Picker> 
 
-        <Button 
-          action = {this.handleFormSubmit}
-          //className = {'submitButton'}
-          type = {'primary'}
-          title = {'Submit'} 
-          disabled = {!isEnabled}/> { /*Submit */ }
-      
-        <Button 
-          action = {this.handleClearForm}
-          //className = {'clearButton'}
-          type = {'secondary'}
-          title = {'Clear'}/> {/* Clear the form */}
-        
+        <Button style={styles.button}
+          title="SUBMIT"
+          onPress={this.handleFormSubmit}
+          color="#696969"
+          />
+
+      </Text>
       </View>
   );
 }
 }
+const styles = StyleSheet.create({
+  button: {
+    borderRadius: 10,
+    margin: 20,
+    paddingTop: 20
+  },
+  container: { 
+    flex: 1, 
+    padding: 16, 
+    paddingTop: 30, 
+    backgroundColor: '#282c34' 
+  },
+
+  head: { 
+    height: 40, 
+    backgroundColor: 'grey' 
+  },
+
+  text: { 
+    margin: 6 , 
+    color:'white'
+  },
+
+  inputContainer: 
+  {
+    fontFamily: 'Georgia',
+    fontSize: 15,
+    lineHeight: 40,
+    borderRadius: 4,
+    letterSpacing: 2,
+    backgroundColor: 'white',
+    fontStyle: '#282c34',
+    textAlignVertical: 'top',
+    padding: 5,
+    textAlign: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
+    margin: 4,
+  },
+  newPersonHeadline:
+  {
+    fontFamily: 'Georgia',
+    fontSize: 15,
+    lineHeight: 40,
+    letterSpacing: 2,
+    color: 'white',
+    textAlign: 'center'
+  }
+});
 
 export default FormContainer;
 

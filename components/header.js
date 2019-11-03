@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     //backgroundImage: 'linear-gradient(black, #282c34)',
     paddingTop: '2%',
-    color: 'white',
     //width: 100,
     justifyContent: 'center',
     //minWidth: '775px'

@@ -10,6 +10,7 @@ import  store from './components/store/index';
 import Initializer from './components/initializer'
 
 import AppNavigator from './navigation/AppNavigator';
+import FormContainer from './components/FormContainer';
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
