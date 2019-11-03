@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Text,
   Picker,
+  TextInput,
   TouchableOpacity,
   View,
   
@@ -16,7 +17,8 @@ import {
 
 /* Import Components; These are our dumb components. They are stateless functional components. */
 //import Button from './Button'
-import InputField from './TextInput'; 
+//import InputField from './TextInput'; 
+import { DropDownMenu } from 'material-ui';
 //import Picker from './Picker';
 
 
@@ -80,7 +82,7 @@ class FormContainer extends Component {
   }
 
   handleRating(e) {
-    let value = e.target.value;
+    let value = e;
     this.setState( prevState => ({ newPerson : 
         {...prevState.newPerson, rating: value
         }
@@ -116,8 +118,8 @@ class FormContainer extends Component {
      // })
       
   }
-/*
-  handleClearForm(e) {
+
+  /*handleClearForm() {
     // Logic for resetting the form
     console.log("clear button pushed")
     this.setState({ 
@@ -135,55 +137,67 @@ render() {
   const { firstName, lastName, profession, year, rating } = this.state.newPerson;
   const isEnabled = (firstName !=="" && lastName !=="" && profession !=="" && year !=="" && rating !=="");
   console.log("inni render til formcontainer")
+  
+  const ratingOptions = [];
+  for(var i=1; i<101; i++){
+    ratingOptions.push(i.toString());
+  }
+
   return (
       <View style={styles.container}>
-      <Text style={styles.newPersonHeadline}>ADD NEW PERSON</Text>
-      <Text style={styles.inputContainer}>
-        
-        <InputField 
-          title= {'First name '} 
-          name= {'firstName'}
-          value={this.state.newPerson.firstName} 
-          placeholder = {'John'}
-          onChange = {this.handleFirstName}/> {/* First name of the user */}
-        
-        <InputField 
-          title= {'Last name '} 
-          name= {'lastName'}
-          value={this.state.newPerson.lastName} 
-          placeholder = {'Smith'}
-          onChange = {this.handleLastName}/> {/* Last name of the user */}
+        <Text style={styles.newPersonHeadline}>ADD NEW PERSON</Text>
+        <Text style={styles.inputContainer}>
+          
+          <Text>FIRST NAME</Text>
+          <TextInput style={styles.textInput}
+            title= {'First name '} 
+            name= {'firstName'}
+            value={this.state.newPerson.firstName} 
+            placeholder = {'John'}
+            onChange = {this.handleFirstName}/> {/* First name of the user */}
+          
+          <Text>LAST NAME</Text>
+          <TextInput style={styles.textInput}
+            title= {'Last name '} 
+            name= {'lastName'}
+            value={this.state.newPerson.lastName} 
+            placeholder = {'Smith'}
+            onChange = {this.handleLastName}/> {/* Last name of the user */}
+          
+          <Text>BIRTH YEAR</Text>
+          <TextInput style={styles.textInput}
+            name={'age'}
+            title= {'Birth year '} 
+            maxLength = {4}
+            value={this.state.newPerson.age} 
+            placeholder = {'1900'}
+            onChange ={this.handleAge} /> {/* Age */} 
+          
+          <Text>PROFESSION</Text>
+          <TextInput style={styles.textInput}
+            name={'profession'}
+            title= {'Profession '} 
+            value={this.state.newPerson.profession} 
+            placeholder = {'Pimp'}
+            onChange ={this.handleProfession} /> {/* Profession */} 
+          
+          <Text>RATING</Text>
+          <Picker
+            selectedValue={this.state.newPerson.rating}
+            onValueChange={this.handleRating}
+            >
+            {ratingOptions.map((item, index) => {
+            return (<Picker.Item style={styles.textInput} label={item} value={index} key={index}/>) 
+            })}
+          </Picker> 
 
-        <InputField 
-          name={'age'}
-          title= {'Birth year '} 
-          maxLength = {4}
-          value={this.state.newPerson.age} 
-          placeholder = {'1900'}
-          onChange={this.handleAge} /> {/* Age */} 
-        
-        <InputField 
-          name={'profession'}
-          title= {'Profession '} 
-          value={this.state.newPerson.profession} 
-          placeholder = {'Pimp'}
-          onChange={this.handleProfession} /> {/* Profession */} 
-        
-        <Picker
-          selectedValue={this.state.newPerson.rating}
-          onValueChange={this.handleRating}
-          >
-        <Picker.Item label="Java" value="java" />
-        <Picker.Item label="JavaScript" value="js" />
-      </Picker> 
-
-        <Button style={styles.button}
-          title="SUBMIT"
-          onPress={this.handleFormSubmit}
-          color="#696969"
-          />
-
-      </Text>
+          <Button style={styles.button}
+            title={'SUBMIT'}
+            onPress={this.handleFormSubmit}
+            color={'#696969'}
+           /> {/* Submit button */}
+          
+        </Text>
       </View>
   );
 }
@@ -192,7 +206,13 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 10,
     margin: 20,
-    paddingTop: 20
+    marginTop: 20,
+    padding: 20
+  },
+  textInput: {
+    textAlign: 'center',
+    alignContent: 'center',
+    marginBottom: 10
   },
   container: { 
     flex: 1, 
@@ -219,20 +239,23 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     letterSpacing: 2,
     backgroundColor: 'white',
-    fontStyle: '#282c34',
     textAlignVertical: 'top',
     padding: 5,
     textAlign: 'center',
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
-    margin: 4,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    marginBottom: 10
   },
   newPersonHeadline:
   {
     fontFamily: 'Georgia',
-    fontSize: 15,
+    fontSize: 25,
     lineHeight: 40,
+    fontWeight: '700',
     letterSpacing: 2,
     color: 'white',
     textAlign: 'center'
@@ -241,3 +264,8 @@ const styles = StyleSheet.create({
 
 export default FormContainer;
 
+/*
+<Button style={styles.button}
+          title="CLEAR"
+          onPress={this.handleClearForm}
+          color="#696969" />*/

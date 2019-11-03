@@ -32,19 +32,6 @@ export default function HomeScreen() {
         <Table/>
         <FormContainer/>
       </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          Tabs
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>
-            navigation/MainTabNavigator.js Heisann sveisann
-          </MonoText>
-        </View>
-      </View>
     </View>
   );
 }
