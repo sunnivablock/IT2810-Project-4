@@ -134,7 +134,6 @@ class FormContainer extends Component {
 render() {
   const { firstName, lastName, profession, year, rating } = this.state.newPerson;
   const isEnabled = (firstName !=="" && lastName !=="" && profession !=="" && year !=="" && rating !=="");
-  console.log("inni render til formcontainer")
   return (
       <View style={styles.container}>
       <Text style={styles.newPersonHeadline}>ADD NEW PERSON</Text>
@@ -169,19 +168,19 @@ render() {
           placeholder = {'Pimp'}
           onChange={this.handleProfession} /> {/* Profession */} 
         
-        <Picker
+        {/*<Picker
           selectedValue={this.state.newPerson.rating}
           onValueChange={this.handleRating}
           >
         <Picker.Item label="Java" value="java" />
         <Picker.Item label="JavaScript" value="js" />
-      </Picker> 
+        </Picker> */}
 
-        <Button style={styles.button}
+        {/*<Button style={styles.button}
           title="SUBMIT"
           onPress={this.handleFormSubmit}
           color="#696969"
-          />
+      />*/}
 
       </Text>
       </View>

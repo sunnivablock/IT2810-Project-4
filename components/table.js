@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Table, Row, Rows } from 'react-native-table-component';
-import getActors from './data'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import fetchActorsAction from './fetchActors'
@@ -14,42 +13,66 @@ import {
   TouchableOpacity,
   
 } from 'react-native';
-import {getActorsError, getActorsPending} from './reducers/reducer'
 
-export default class Table1 extends Component {
+
+class Table1 extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tableHead: ['Rating', 'First Name', 'Last Name', 'Year'],
-      tableData: [
-        [10, 'Channing', 'Tatum', 1986],
-        [9, 'Brad', 'Pitt', 1964],
-        [8, 'James', 'Bond', 1972],
-        [7, 'Channing', 'Tatum', 1976],      
-
-      ]
-      
-      
-      //getActors()
+      tableData: []
     }
   }
-
+  
 
 
   render() {
     const state = this.state;
-    console.log(getActors())
-    return (
-
-      <View style={styles.container}>
-        <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
-          <Row data={state.tableHead} style={styles.head} textStyle={styles.text}/>
-          <Rows data={state.tableData} textStyle={styles.text}/>
-        </Table>
-      </View>
-    )
+    if (this.props.pending===true){
+      console.log("fetching data")
+      return (
+        <View></View>
+      )}
+  
+    else{
+      let rows=[]
+      this.props.actors.map(actor => {
+        rows.push([actor.rating, actor.firstName, actor.lastName, actor.year])
+      })
+      //this.setState({tableData: rows}
+      return (
+        <ScrollView>
+        <View style={styles.container}>
+          <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
+            <Row data={state.tableHead} style={styles.head} textStyle={styles.text}/>
+            <Rows data={rows} textStyle={styles.text}/>
+          </Table>
+        </View>
+        </ScrollView>
+      )
+    }
+    
+    
+   
+    
   }
 }
+const mapStateToProps = state => {
+  return {
+  actors: state.actors.actors,
+  error: state.actors.error,
+  pending: state.actors.pending
+}}
+
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  fetchActors: fetchActorsAction,
+}, dispatch)
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Table1);
 
 
 
