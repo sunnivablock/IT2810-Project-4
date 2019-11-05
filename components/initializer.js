@@ -14,9 +14,10 @@ class Initializer extends Component {
     return true;
 }
 
+
    componentDidMount(){
     const {fetchActors}=this.props;
-    fetchActors('http://it2810-09.idi.ntnu.no:8000/api/persons')
+    fetchActors('http://it2810-09.idi.ntnu.no:8000/api/persons?sort=lastName')
   }
 
   

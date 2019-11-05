@@ -1,9 +1,7 @@
-/*import React, {Component} from 'react';
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
-//import '../App.css'
 import {SearchSuccess} from '../components/actions/index'
-//import Select from './Select'
-//import searchLogo from '../search-icon.png'
+
 
 class Search extends Component {
  
@@ -12,7 +10,6 @@ class Search extends Component {
        
     this.handleFirstName = this.handleFirstName.bind(this);
     this.handleLastName = this.handleLastName.bind(this);
-    this.handleYear = this.handleYear.bind(this);
     this.handleRating = this.handleRating.bind(this);
     this.handleSorting=this.handleSorting.bind(this);
     this.handleSortDirection=this.handleSortDirection.bind(this);
@@ -155,13 +152,13 @@ class Search extends Component {
               </div>
             
          )
-     }*/
+     }
    }
    
    
-  /* const mapStateToProps = state => ({
+   const mapStateToProps = state => ({
      values: state.values.values
    })
 
 
-   export default connect(mapStateToProps)(Search)*/
+   export default connect(mapStateToProps)(Search)

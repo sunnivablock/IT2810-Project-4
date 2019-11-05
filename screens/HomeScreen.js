@@ -15,7 +15,6 @@ import {
   View,
 } from 'react-native';
 
-import { MonoText } from '../components/StyledText';
 import { TextInput } from 'react-native-gesture-handler';
 
 export default function HomeScreen() {

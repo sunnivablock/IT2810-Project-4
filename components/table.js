@@ -19,10 +19,11 @@ class Table1 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tableHead: ['Rating', 'First Name', 'Last Name', 'Year'],
+      tableHead: ['Rating', 'Name'],
       tableData: []
     }
   }
+  
   
 
 
@@ -37,7 +38,7 @@ class Table1 extends Component {
     else{
       let rows=[]
       this.props.actors.map(actor => {
-        rows.push([actor.rating, actor.firstName, actor.lastName, actor.year])
+        rows.push([actor.rating, actor.firstName +' '+ actor.lastName])
       })
       //this.setState({tableData: rows}
       return (
