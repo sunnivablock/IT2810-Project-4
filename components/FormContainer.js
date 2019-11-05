@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     letterSpacing: 2,
     backgroundColor: 'white',
-    fontStyle: '#282c34',
+    //fontStyle: '#282c34',
     textAlignVertical: 'top',
     padding: 5,
     textAlign: 'center',

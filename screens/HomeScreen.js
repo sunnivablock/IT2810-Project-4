@@ -4,7 +4,7 @@ import FormContainer from '../components/FormContainer'
 import Header from '../components/header'
 import Table from '../components/table'
 import Initializer from '../components/initializer'
-//import Search from '../components/search'
+import Search from '../components/search'
 import {
   Image,
   Platform,
@@ -24,10 +24,10 @@ export default function HomeScreen() {
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
-        <Initializer/>
         <Header/>
+        <Initializer/>
+        <Search/>
         <Table/>
-        {/* <Search/> */}
         <FormContainer/>
       </ScrollView>
 

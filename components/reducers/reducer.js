@@ -13,12 +13,12 @@ import {FETCH_ACTORS_PENDING, FETCH_ACTORS_SUCCESS, FETCH_ACTORS_ERROR,
       pending:false,
       
       values:{ 
-          Rating:'',
-          Fornavn: '',
-          Etternavn: '',
-          Født: '',
-          Sorting: '',
-          SortDirection:'asc',
+          rating:'',
+          firstName: '',
+          lastName: '',
+          year: '',
+          Sort: '',
+          SortDirection:'ascending',
         },
       error:null
       

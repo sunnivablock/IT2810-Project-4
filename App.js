@@ -28,7 +28,7 @@ export default function App(props) {
       <View style={styles.container}>
          <Provider store={store}>
             {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-            <Initializer/>
+            
         <AppNavigator />
      
     </Provider>
