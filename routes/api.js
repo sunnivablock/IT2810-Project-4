@@ -52,7 +52,4 @@ router.post('/persons', (req, res, next) => {
 });
 
 
-
-
-
 module.exports = router;

@@ -20,7 +20,7 @@ class Table1 extends Component {
     this.state = {
       tableHead: ['Rating', 'Name'],
       tableData: [],
-      firstIndex:1,
+      firstIndex:0,
       lastIndex:10,
       rows:[],
       display:[]
@@ -48,16 +48,22 @@ class Table1 extends Component {
   }
 
   buttonClickNextPage(){
-    
     let newFirstIndex=this.state.lastIndex+1
     let newLastIndex=this.state.lastIndex+11
-    if (newLastIndex<=this.props.actors.length){
+    if (newLastIndex<=(this.props.actors.length)){
+      this.setState({lastIndex:newLastIndex})
       this.setState({firstIndex:newFirstIndex}),
-      this.setState({lastIndex:newLastIndex}),
-      console.log(this.state.lastIndex, this.state.firstIndex)
-      this.loadData()}
+      this.loadData()
+      }
+    else if(newLastIndex<(this.props.actors.length+11)){
+      this.setState({lastIndex:(this.props.actors.length-1)})
+      this.setState({firstIndex:newFirstIndex}),
+      this.loadData(),
+      this.setState({lastIndex:300})
+    }
     else{
-      console.log("feil")}
+
+    } 
   }
   
 
@@ -73,29 +79,28 @@ class Table1 extends Component {
     else{
       let rows=[]
       this.props.actors.map(actor => {
-        rows.push([actor.rating, actor.firstName +' '+ actor.lastName])
+        rows.push([actor.rating, " -  "+ actor.firstName +' '+ actor.lastName])
       })
-      //this.setState({tableData: rows}
+      let display = rows.slice(this.state.firstIndex, this.state.lastIndex)
+
       return (
         <View>
         <FlatList
         style={styles.container}
-        data={this.state.display}
+        data={display}
         renderItem={this.renderRow}
         keyExtractor={(item, index)=>index.toString()}
         />
         <Button
-        onPress={ this.buttonClickNextPage.bind(this) } 
-        title="Press Me"
+        onPress={this.buttonClickNextPage.bind(this) } 
+        title="Neste side"
       />
       </View>
       )
     }
-    
-   
-    
   }
 }
+
 const mapStateToProps = state => {
   return {
   actors: state.actors.actors,
@@ -122,7 +127,7 @@ const styles = StyleSheet.create({
   actorText: { 
     margin: 6 , 
     color:'white',
-    fontSize:30,
+    fontSize:18,
     padding:5},
   actor: {
     borderBottomColor:'#ccc',
@@ -130,41 +135,3 @@ const styles = StyleSheet.create({
     marginBottom:10
   }
 });
-
-/* <ScrollView
-          pagingEnabled={true} // animates ScrollView to nearest multiple of it's own width
-          showsHorizontalScrollIndicator={false}>
-
-            {rows.map((actor) => { // for every object in the photos array...
-                return ( // ... we will return a square Image with the corresponding object as the source
-                  <Text style={{color:"white"}}> {actor} </Text>
-                  );
-              })}
-          </ScrollView>
-
-
-
-        {<View style={styles.container}>
-          <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
-            <Row data={state.tableHead} style={styles.head} textStyle={styles.text}/>
-            <Rows data={rows} textStyle={styles.text}/>
-          </Table>
-        </View>}
-
-
-
-
-
-          buttonClickNextPage(){
-    let newLastIndex=this.state.lastIndex+11
-    if (newLastIndex<=this.props.actors.length){
-      this.setState({lastIndex:newLastIndex})}
-    else{
-      let newLastIndex=this.props.actors.length
-      this.setState({lastIndex:newLastIndex})
-    }
-    let newFirstIndex=this.state.lastIndex+1
-    this.setState({firstIndex:newFirstIndex}),
-    console.log(this.state.lastIndex, this.state.firstIndex)
-    this.loadData()}
-        )*/

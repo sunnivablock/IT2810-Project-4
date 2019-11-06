@@ -17,7 +17,7 @@ class Initializer extends Component {
 
    componentDidMount(){
     const {fetchActors}=this.props;
-    fetchActors('http://it2810-09.idi.ntnu.no:8000/api/persons?sort=lastName')
+    fetchActors('http://it2810-09.idi.ntnu.no:8000/api/persons?sort=rating')
   }
 
   

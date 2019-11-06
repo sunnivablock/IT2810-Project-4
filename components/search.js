@@ -43,7 +43,6 @@ class Search extends Component {
     
        handleLastName(e) {
         let value = e.target.value;
-        //return value;
         this.setState( prevState => ({ values : 
              {...prevState.values, lastName: value
              }
