@@ -17,7 +17,9 @@ import {
 class Initializer extends Component {
   constructor(props) {
     super(props);
-
+    //this.handleButtonClick=this.handleButtonClick.bind(this);
+    this.fire=this.fire.bind(this);
+    //this.handleButtonClick=this.handleButtonClick.bind(this);
     this.state = {
       values:{
       rating: "",
@@ -67,10 +69,11 @@ generateURLQuery = () => {
   
 
   render() {
+
     if(!this.shouldComponentRender()) return (<div>Appen laster ikke</div>)
     return (
       <View >
-        <Button style={styles.title} title="search" action={() => this.handleButtonClick, console.log('Simple Button pressed')}>Search</Button>
+        <Button style={styles.title} title="Search" onPress={() => (this.handleButtonClick.bind(this), console.log("Button pressed"))}></Button>
       </View>
     )
   }

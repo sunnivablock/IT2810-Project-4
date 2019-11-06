@@ -25,8 +25,8 @@ export default function HomeScreen() {
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
         <Header/>
-        <Initializer/>
         <Search/>
+        <Initializer/>
         <Table/>
         <FormContainer/>
       </ScrollView>

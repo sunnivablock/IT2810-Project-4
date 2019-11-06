@@ -67,12 +67,12 @@ render() {
 
   else{
     
-    console.log("Redux:",this.props.values)
+    console.log("Redux:",this.props.values.firstName)
 
     return (
       <View>
 
-      <Text>{"Values:",this.props.values.values}</Text>
+      <Text>{"Values:",this.props.values.firstName}</Text>
       <TextInput  placeholder="Search" 
       value={this.state.values.firstName}
       onChange={this.handleFirstName}

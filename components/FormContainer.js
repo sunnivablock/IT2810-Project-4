@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
 
   inputContainer: 
   {
-    fontFamily: 'Georgia',
+    //fontFamily: 'Georgia',
     fontSize: 15,
     lineHeight: 40,
     borderRadius: 4,
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
   },
   newPersonHeadline:
   {
-    fontFamily: 'Georgia',
+    //fontFamily: 'Georgia',
     fontSize: 15,
     lineHeight: 40,
     letterSpacing: 2,
