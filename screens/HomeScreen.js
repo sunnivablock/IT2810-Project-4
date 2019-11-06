@@ -1,11 +1,10 @@
 import * as WebBrowser from 'expo-web-browser';
-//import Table from '../components/table'
 import React from 'react';
 import FormContainer from '../components/FormContainer'
 import Header from '../components/header'
 import Table from '../components/table'
-import getActors from '../components/data'
 import Initializer from '../components/initializer'
+//import Search from '../components/search'
 import {
   Image,
   Platform,
@@ -16,34 +15,23 @@ import {
   View,
 } from 'react-native';
 
-import { MonoText } from '../components/StyledText';
+import { TextInput } from 'react-native-gesture-handler';
 
 export default function HomeScreen() {
-  //if(!this.shouldComponentRender()) return (<div>Appen laster ikke</div>) Må ha inn noe så appen ikke laster før vi har fått data
   return (
-    getActors(),
+    
     <View style={styles.container}>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
-      <Initializer/>
-      <Header/>
-      <Table/>
-
+        <Initializer/>
+        <Header/>
+        <Table/>
+        {/* <Search/> */}
+        <FormContainer/>
       </ScrollView>
 
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          Tabs
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>
-            navigation/MainTabNavigator.js
-          </MonoText>
-        </View>
-      </View>
+      
     </View>
   );
 }
