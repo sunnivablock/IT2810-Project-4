@@ -1,26 +1,19 @@
 import * as WebBrowser from 'expo-web-browser';
 //import Table from '../components/table'
 import React from 'react';
-import FormContainer from '../components/FormContainer'
 import Header from '../components/header'
 import Table from '../components/table'
 import getActors from '../components/data'
 import Initializer from '../components/initializer'
 import {
-  Image,
   Platform,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 
-import { MonoText } from '../components/StyledText';
-import { TextInput } from 'react-native-gesture-handler';
-
 export default function HomeScreen() {
-  //if(!this.shouldComponentRender()) return (<div>Appen laster ikke</div>) Må ha inn noe så appen ikke laster før vi har fått data
   return (
     getActors(),
     <View style={styles.container}>
@@ -30,7 +23,6 @@ export default function HomeScreen() {
         <Initializer/>
         <Header/>
         <Table/>
-        <FormContainer/>
       </ScrollView>
     </View>
   );

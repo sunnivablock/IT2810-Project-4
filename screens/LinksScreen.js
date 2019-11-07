@@ -1,19 +1,27 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
 import FormContainer from '../components/FormContainer'
+import {
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
 
 export default function LinksScreen() {
   return (
-    <ScrollView style={styles.container}>
-      
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView style={styles.container}>
+        <FormContainer/>
+      </ScrollView>
+    </View>
   );
 }
-
+LinksScreen.navigationOptions = {
+  header: null,
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#fff',
+    backgroundColor: '#282c34',
   },
 });
