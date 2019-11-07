@@ -1,10 +1,9 @@
 import * as WebBrowser from 'expo-web-browser';
-//import Table from '../components/table'
 import React from 'react';
 import Header from '../components/header'
 import Table from '../components/table'
-import getActors from '../components/data'
 import Initializer from '../components/initializer'
+//import Search from '../components/search'
 import {
   Platform,
   ScrollView,
@@ -13,9 +12,11 @@ import {
   View,
 } from 'react-native';
 
+import { TextInput } from 'react-native-gesture-handler';
+
 export default function HomeScreen() {
   return (
-    getActors(),
+    
     <View style={styles.container}>
       <ScrollView
         style={styles.container}
