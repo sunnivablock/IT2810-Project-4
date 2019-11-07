@@ -1,17 +1,14 @@
 import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
-import FormContainer from '../components/FormContainer'
 import Header from '../components/header'
 import Table from '../components/table'
 import Initializer from '../components/initializer'
 //import Search from '../components/search'
 import {
-  Image,
   Platform,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -27,11 +24,7 @@ export default function HomeScreen() {
         <Initializer/>
         <Header/>
         <Table/>
-        {/* <Search/> */}
-        <FormContainer/>
       </ScrollView>
-
-      
     </View>
   );
 }

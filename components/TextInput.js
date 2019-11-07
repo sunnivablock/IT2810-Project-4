@@ -6,12 +6,13 @@ const InputField = (props) => {
         <TextInput
         className={props.className}
         id={props.name}
+        title={props.title}
         name={props.name}
         allowFontScaling={true} 
         type={props.type}
         maxLength={props.maxLength}
         value={props.value}
-        onChange={props.handleChange}
+        onChangeText={props.onChangeText}
         placeholder={props.placeholder} 
         />
     )
