@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, ScrollView, Button } from 'react-native';
+import { StyleSheet, View, Text, ListItem, Button, TouchableWithoutFeedback } from 'react-native';
 import { Table, Row, Rows } from 'react-native-table-component';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import fetchActorsAction from './fetchActors'
-import {
-  Image,
-  Platform,
-  TouchableOpacity,
-  
-} from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
 
@@ -28,14 +22,6 @@ class Table1 extends Component {
 
   }
   
-
-  renderRow = ({item}) => {
-      return (
-        <View style={styles.actor}>
-          <Text style={styles.actorText}>{item}</Text>
-        </View>
-      )
-  }
 
   loadData(){
     let rows=[]
@@ -65,6 +51,10 @@ class Table1 extends Component {
 
     } 
   }
+
+  actionOnRow(actor){
+    console.log(actor[1] + " " + actor[2] + " er " + actor[4] + " og er født i " + actor[3])
+  }
   
 
 
@@ -79,7 +69,7 @@ class Table1 extends Component {
     else{
       let rows=[]
       this.props.actors.map(actor => {
-        rows.push([actor.rating, " -  "+ actor.firstName +' '+ actor.lastName])
+        rows.push([actor.rating, actor.firstName, actor.lastName, actor.year, actor.profession])
       })
       let display = rows.slice(this.state.firstIndex, this.state.lastIndex)
 
@@ -88,8 +78,20 @@ class Table1 extends Component {
         <FlatList
         style={styles.container}
         data={display}
-        renderItem={this.renderRow}
         keyExtractor={(item, index)=>index.toString()}
+        //renderItem={this.renderRow}
+        renderItem={({item}) => (
+          <TouchableWithoutFeedback onPress={ () => this.actionOnRow(item)}>
+              <View style={styles.actor}>
+                 <Text style={styles.actorText}>{item[0]+ " - " + item[1] + " " + item[2]}</Text>
+              </View>
+
+         </TouchableWithoutFeedback>
+
+     )}
+
+
+
         />
         <Button
         onPress={this.buttonClickNextPage.bind(this) } 
