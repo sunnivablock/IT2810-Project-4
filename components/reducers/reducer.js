@@ -17,8 +17,8 @@ import {FETCH_ACTORS_PENDING, FETCH_ACTORS_SUCCESS, FETCH_ACTORS_ERROR,
           firstName: '',
           lastName: '',
           year: '',
-          Sort: '',
-          SortDirection:'ascending',
+          Sorting: '',
+          SortDirection:'',
         },
       error:null
       

@@ -10,7 +10,9 @@ import {
   TouchableOpacity,
   View,
   StyleSheet
+  
 } from 'react-native';
+
 import { SocialSentimentDissatisfied } from 'material-ui/svg-icons';
 
 
@@ -48,7 +50,7 @@ handleFirstName(e) {
       firstName: value,
       lastName: this.props.values.lastName,
       year: this.props.values.year,
-      Sorting: this.props.values.Sort,
+      Sorting: this.props.values.Sorting,
       SortDirection:this.props.values.SortDirection
      }
   this.props.dispatch(SearchSuccess(object))
@@ -66,7 +68,7 @@ handleFirstName(e) {
       firstName: this.props.values.firstName,
       lastName: value,
       year: this.props.values.year,
-      Sort: this.props.values.Sort,
+      Sorting: this.props.values.Sorting,
       SortDirection:this.props.values.SortDirection
      }
   this.props.dispatch(SearchSuccess(object))
@@ -94,7 +96,7 @@ render() {
       
       <TextInput  
       style={styles.textFields}
-      placeholder="Search First Name" 
+      placeholder="First Name" 
       value={this.state.values.firstName}
       onChange={this.handleFirstName}
       id="First Name"
@@ -105,7 +107,7 @@ render() {
       </TextInput>
       <TextInput  
       style={styles.textFields}
-      placeholder="Search Last Name" 
+      placeholder="Last Name" 
       value={this.state.values.lastName}
       onChange={this.handleLastName}
       id="Last Name"
@@ -114,6 +116,7 @@ render() {
       borderWidth: 1,
       backgroundColor:'white' }}>
       </TextInput>
+      
       </View>
     )}}
       }
@@ -133,8 +136,15 @@ render() {
       flexDirection:'row',
       justifyContent:'space-evenly'
     },
+    AppLogo :{
+      height: 20,
+      width:20,
+      resizeMode: 'contain',
+      marginTop:3,
+      //display: 'block'
+    },
     textFields: {
-     
+     //color:'blue'
      
 
     },

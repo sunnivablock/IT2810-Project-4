@@ -13,6 +13,9 @@ import {
   TouchableOpacity,
   
 } from 'react-native';
+import Up from '../assets/images/Up.png'
+import Down from '../assets/images/Down.png'
+import { CheckBox } from 'react-native-elements'
 
 class Initializer extends Component {
   constructor(props) {
@@ -28,8 +31,8 @@ class Initializer extends Component {
       year: '',
       Sorting:"rating",
       SortDirection:"descending"
-
-  } }
+  } ,
+      checked:true}
   }
 
   shouldComponentRender(){
@@ -74,7 +77,15 @@ generateURLQuery = () => {
 
     if(!this.shouldComponentRender()) return (<div>Appen laster ikke</div>)
     return (
-      <View >
+      <View style= {styles.container}>
+        <CheckBox
+        title='Desc'
+        checkedTitle='Asc'
+        checkedIcon={<Image source={Up} style={styles.AppLogo}/>}
+        uncheckedIcon={<Image source={Down} style={styles.AppLogo} />}
+        checked={this.state.checked}
+        onPress={() => this.setState({checked: !this.state.checked})}
+        />
         <Button style={styles.title} title="Search" onPress={() => (this.handleButtonClick(), 
           console.log("Button pressed, fname:"+this.props.values.firstName))}></Button>
       </View>
@@ -109,4 +120,17 @@ title: {
   overlayColor:'red',
   width: 40,
   height:10
-} })
+},
+AppLogo :{
+  height: 20,
+  width:20,
+  resizeMode: 'contain',
+  marginTop:3,
+  //display: 'block'
+},
+container: {
+  flex: 1,
+  display:'flex',
+  flexDirection:'row',
+  justifyContent:'space-evenly'
+}, })

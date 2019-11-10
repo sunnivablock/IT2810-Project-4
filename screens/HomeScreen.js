@@ -169,16 +169,16 @@ const styles = StyleSheet.create({
     flex: 1,
     display:'flex',
     flexDirection:'row',
-    width:600,
-    border: 'black',
-    height:30,
-    padding:30,
+    //width:600,
+    
+    //height:30,
+    //padding:30,
     backgroundColor:'white',
     alignItems:'center',
   },
   sContainer:{
     display:'flex',
-    alignItems:'center'
-    
+    alignItems:'center',
+    justifyContent:'space-evenly'
   },
 });
