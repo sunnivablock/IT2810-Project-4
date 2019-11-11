@@ -68,7 +68,8 @@ generateURLQuery = () => {
       this.setState({values:{firstName: this.props.values.firstName, 
         lastName:this.props.values.lastName, year:parseInt(this.props.values.year),
         rating:parseInt(this.props.values.rating), Sorting:this.props.values.Sort,
-        SortDirection:this.props.values.SortDirection}},this.fire, console.log("handleButtonClick-End"))
+        }},this.fire, console.log("Afterclick state",this.state.values))
+
         
    }
   
@@ -84,7 +85,11 @@ generateURLQuery = () => {
         checkedIcon={<Image source={Up} style={styles.AppLogo}/>}
         uncheckedIcon={<Image source={Down} style={styles.AppLogo} />}
         checked={this.state.checked}
-        onPress={() => this.setState({checked: !this.state.checked})}
+        onPress={() => 
+          
+          {this.setState({checked: !this.state.checked}), 
+          (this.state.values.SortDirection==='descending')?(this.setState({values:{SortDirection: 'ascending'}}), console.log("Set Asc"))
+        :(this.setState({values:{SortDirection:'descending'}}), console.log("Set Desc")), console.log("immediate state:", this.state.values.SortDirection)}}
         />
         <Button style={styles.title} title="Search" onPress={() => (this.handleButtonClick(), 
           console.log("Button pressed, fname:"+this.props.values.firstName))}></Button>
