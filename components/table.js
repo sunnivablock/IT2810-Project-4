@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, ListItem, Button, TouchableWithoutFeedback } from 'react-native';
+import { Image, StyleSheet, View, Text, ListItem, Button, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { Table, Row, Rows } from 'react-native-table-component';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import fetchActorsAction from './fetchActors'
 import { FlatList } from 'react-native-gesture-handler';
+import up from '../assets/images/up.png'
+import down from '../assets/images/down.png'
+import CollapseView from "react-native-collapse-view";
 
 
 class Table1 extends Component {
@@ -17,11 +20,20 @@ class Table1 extends Component {
       firstIndex:0,
       lastIndex:10,
       rows:[],
-      display:[]
+      display:[],
+      toggle: true,
+      myFavorites:[],
+      isLiked: false,
+      activeActor: null
     }
 
   }
-  
+ 
+  /*ToggleFunction = () => {
+    this.setState(state => ({
+      toggle: !state.toggle
+    }));
+  };*/
 
   loadData(){
     let rows=[]
@@ -72,8 +84,39 @@ class Table1 extends Component {
   actionOnRow(actor){
     console.log(actor[1] + " " + actor[2] + " er " + actor[4] + " og er født i " + actor[3])
   }
-  
 
+   
+  _renderView = (collapse) => {
+    return(
+      <View style={styles.view}>
+        <Text>{collapse? 'Show less': 'Show more'}</Text>
+      </View>
+    )
+  }
+  _renderCollapseView = (collapse) => {
+    let actor = [55,"Navnesen","Navn","brannmann", "1900"]
+    return(
+      <View style={styles.collapseView}>
+        <Text>{actor[1] + " " + actor[2] + " er " + actor[4] + " og er født i " + actor[3]}</Text>
+      </View>
+    )
+  }
+  
+  /*async updateList() {
+    const response = await AsyncStorage.getItem('favorites');
+    const favorites = await JSON.parse(response) || [];
+    this.setState({
+        myFavorites: favorites
+      });
+    console.log(this.state.myFavorites);
+    if (favorites.includes(this.props.actor)) {
+      this.setState({ isLiked: true });
+    }
+    else {
+      this.setState({ isLiked: false })
+    }
+    console.log(this.state.isLiked);
+  }*/
 
   render() {
     const state = this.state;
@@ -101,14 +144,10 @@ class Table1 extends Component {
           <TouchableWithoutFeedback onPress={ () => this.actionOnRow(item)}>
               <View style={styles.actor}>
                  <Text style={styles.actorText}>{item[0]+ " - " + item[1] + " " + item[2]}</Text>
+                 <CollapseView renderView={this._renderView} renderCollapseView={this._renderCollapseView} text={"hei"}/>
               </View>
-
          </TouchableWithoutFeedback>
-
      )}
-
-
-
         />
         <View style = {styles.buttons}>
         <Button style={styles.prev}
@@ -143,12 +182,16 @@ export default connect(
   mapDispatchToProps
 )(Table1);
 
-
-
 const styles = StyleSheet.create({
-  container: {padding: 16, paddingTop: 30, 
-    backgroundColor: '#282c34' },
-  head: { height: 40, backgroundColor: 'grey' },
+  container: {
+    padding: 16, 
+    paddingTop: 30, 
+    backgroundColor: '#282c34' 
+  },
+  head: { 
+    height: 40, 
+    backgroundColor: 'grey' 
+  },
   actorText: { 
     margin: 6 , 
     color:'white',
@@ -166,5 +209,43 @@ const styles = StyleSheet.create({
   prev: {
     color:'white',
     fontSize:18,
-  }
+  },
+  expandButton: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 700,
+    justifyContent: 'space-between',
+    margin: 10
+  },
+  expand: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 700,
+    justifyContent: 'space-between',
+    marginBottom: 1
+  },
+  collapseView: {
+    padding: 20,
+    color: 'white',
+    backgroundColor: 'white',
+    fontSize: 18,
+  },
+  view: {
+    height:50,
+    padding: 20,
+    justifyContent:'center',
+    backgroundColor:'#ffffff',
+  },
 });
+/*
+                 <Image source={unfilledHeart}/>
+
+<TouchableOpacity onPress={() => this.ToggleFunction()}>
+                  <Text>
+                    {" "}
+                    {this.state.toggle
+                      ? "Add to Favorites"
+                      : "Remove from Favorites"}{" "}
+                  </Text>
+                </TouchableOpacity>
+*/
