@@ -33,16 +33,33 @@ class Table1 extends Component {
     this.setState({display:display})
   }
 
+  buttonClickPrevPage(){
+    let newFirstIndex=this.state.firstIndex-10
+    let newLastIndex=newFirstIndex+10
+    if (newFirstIndex!=-10){
+      this.setState({lastIndex:newLastIndex})
+      this.setState({firstIndex:newFirstIndex}),
+      this.loadData()
+      }
+    else {
+      this.setState({lastIndex:10})
+      this.setState({firstIndex:0}),
+      this.loadData()
+    }
+
+    
+  }
+
   buttonClickNextPage(){
-    let newFirstIndex=this.state.lastIndex+1
-    let newLastIndex=this.state.lastIndex+11
+    let newFirstIndex=this.state.lastIndex
+    let newLastIndex=newFirstIndex+10
     if (newLastIndex<=(this.props.actors.length)){
       this.setState({lastIndex:newLastIndex})
       this.setState({firstIndex:newFirstIndex}),
       this.loadData()
       }
-    else if(newLastIndex<(this.props.actors.length+11)){
-      this.setState({lastIndex:(this.props.actors.length-1)})
+    else if(newLastIndex<(this.props.actors.length+10)){
+      this.setState({lastIndex:(this.props.actors.length)})
       this.setState({firstIndex:newFirstIndex}),
       this.loadData(),
       this.setState({lastIndex:300})
@@ -93,10 +110,16 @@ class Table1 extends Component {
 
 
         />
+        <View style = {styles.buttons}>
+        <Button style={styles.prev}
+        onPress={this.buttonClickPrevPage.bind(this) } 
+        title="Previous page"
+      />
         <Button
         onPress={this.buttonClickNextPage.bind(this) } 
-        title="Neste side"
+        title="Next page"
       />
+      </View>
       </View>
       )
     }
@@ -135,5 +158,13 @@ const styles = StyleSheet.create({
     borderBottomColor:'#ccc',
     borderBottomWidth:1,
     marginBottom:10
+  },
+  buttons:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  prev: {
+    color:'white',
+    fontSize:18,
   }
 });
