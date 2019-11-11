@@ -39,7 +39,7 @@ class Search extends Component {
 }
       
 handleFirstName(e) {
-  let value = e.target.value;
+  let value = e.nativeEvent.text;
   this.setState( prevState => ({ values : 
        {...prevState.values, firstName: value
        }, 
@@ -57,8 +57,7 @@ handleFirstName(e) {
  }
 
  handleLastName(e) {
-  let value = e.target.value;
-  //return value;
+  let value = e.nativeEvent.text;
   this.setState( prevState => ({ values : 
        {...prevState.values, lastName: value
        }
@@ -98,7 +97,7 @@ render() {
       style={styles.textFields}
       placeholder="First Name" 
       value={this.state.values.firstName}
-      onChange={this.handleFirstName}
+      onChange={(firstname)=>{this.handleFirstName(firstname)}}
       id="First Name"
       style={{ height: 40, 
       borderColor: 'gray', 
