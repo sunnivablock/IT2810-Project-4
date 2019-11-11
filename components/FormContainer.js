@@ -230,7 +230,6 @@ const styles = StyleSheet.create({
   textHeader: {
     color: 'black',
     textAlign: 'center',
-    fontSize: 12,
     //fontFamily: 'Georgia',
     letterSpacing: 2,
 

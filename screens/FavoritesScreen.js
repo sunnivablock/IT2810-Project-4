@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import FavoritesPage from '../components/FavoritesPage'
 
-export default function SettingsScreen() {
+export default function FavoritesScreen() {
   /**
    * Go ahead and delete ExpoConfigView and replace it with your content;
    * we just wanted to give you a quick view of your config.
@@ -43,6 +43,6 @@ const styles = StyleSheet.create({
   }
 });
 
-SettingsScreen.navigationOptions = {
+FavoritesScreen.navigationOptions = {
   header: null,
 };

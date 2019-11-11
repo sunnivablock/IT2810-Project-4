@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 
-export default function LinksScreen() {
+export default function AddNewScreen() {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container}>
@@ -15,7 +15,7 @@ export default function LinksScreen() {
     </View>
   );
 }
-LinksScreen.navigationOptions = {
+AddNewScreen.navigationOptions = {
   header: null,
 };
 const styles = StyleSheet.create({

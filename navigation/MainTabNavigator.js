@@ -4,8 +4,8 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import AddNewScreen from '../screens/AddNewScreen';
+import FavoritesScreen from '../screens/FavoritesScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -35,42 +35,42 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = '';
 
-const LinksStack = createStackNavigator(
+const AddNewStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    AddNew: AddNewScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
+AddNewStack.navigationOptions = {
   tabBarLabel: 'ADD NEW',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
   ),
 };
 
-LinksStack.path = '';
+AddNewStack.path = '';
 
-const SettingsStack = createStackNavigator(
+const FavoritesStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Favorites: FavoritesScreen,
   },
   config
 );
 
-SettingsStack.navigationOptions = {
+FavoritesStack.navigationOptions = {
   tabBarLabel: 'FAVORITES',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
   ),
 };
 
-SettingsStack.path = '';
+FavoritesStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  LinksStack,
-  SettingsStack,
+  AddNewStack,
+  FavoritesStack,
 });
 
 tabNavigator.path = '';
