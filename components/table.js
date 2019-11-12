@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Image, StyleSheet, View, Text, ListItem, Button, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { Table, Row, Rows } from 'react-native-table-component';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, dispatch } from 'redux';
 import fetchActorsAction from './fetchActors'
 import { FlatList } from 'react-native-gesture-handler';
 import up from '../assets/images/up.png'
@@ -89,7 +89,6 @@ class Table1 extends Component {
   render() {
     const state = this.state;
     if (this.props.pending===true){
-      console.log("fetching data")
       return (
         <View></View>
       )}
@@ -135,17 +134,18 @@ const mapStateToProps = state => {
   return {
   actors: state.actors.actors,
   error: state.actors.error,
-  pending: state.actors.pending
+  pending: state.actors.pending,
+  values: state.values.values
 }}
 
 
-const mapDispatchToProps = dispatch => bindActionCreators({
+/*const mapDispatchToProps = dispatch => bindActionCreators({
   fetchActors: fetchActorsAction,
-}, dispatch)
+}, dispatch)*/
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  //mapDispatchToProps
 )(Table1);
 
 const styles = StyleSheet.create({
