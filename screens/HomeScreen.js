@@ -26,7 +26,7 @@ export default function HomeScreen() {
         <Header/>
         <View style={styles.sContainer}>
           <View style={styles.searchBar}>
-          <Image source={searchIcon} style={styles.AppLogo} />
+          
             <Search/>
             <Initializer/>
           </View>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   },
   AppLogo :{
     height: 40,
-    width:40,
+    
     resizeMode: 'contain',
     marginTop:3,
     //display: 'block'
@@ -163,13 +163,14 @@ const styles = StyleSheet.create({
   searchBar: {
     flex: 1,
     display:'flex',
-    flexDirection:'row',
-    //width:600,
+    flexDirection:'column',
+    width:'90%',
     
     //height:30,
     //padding:30,
-    backgroundColor:'white',
+    backgroundColor: 'white', 
     alignItems:'center',
+    
   },
   sContainer:{
     display:'flex',

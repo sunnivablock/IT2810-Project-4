@@ -93,11 +93,13 @@ generateURLQuery = () => {
   
 
   render() {
-    console.log("Hei")
 
     if(!this.shouldComponentRender()) return (<div>Appen laster ikke</div>)
     return (
       <View style= {styles.container}>
+      
+
+        <Button style={styles.title} title="Search" onPress={() => (this.handleButtonClick())}></Button>
         <CheckBox
         title='Asc'
         checkedTitle='Desc'
@@ -108,8 +110,6 @@ generateURLQuery = () => {
         (this.state.checked? this.handleCheckClick("ascending"):this.handleCheckClick("descending"))
         )}
         />
-
-        <Button style={styles.title} title="Search" onPress={() => (this.handleButtonClick())}></Button>
       </View>
     )
   }
@@ -153,6 +153,6 @@ AppLogo :{
 container: {
   flex: 1,
   display:'flex',
-  flexDirection:'row',
+  flexDirection:'column',
   justifyContent:'space-evenly'
 }, })

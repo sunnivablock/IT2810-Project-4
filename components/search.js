@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 import { SocialSentimentDissatisfied } from 'material-ui/svg-icons';
+import searchIcon from '../assets/images/search-icon.png'
 
 
 class Search extends Component {
@@ -90,9 +91,9 @@ render() {
     return (
       <View style={styles.container}>
       
-      
+      <Image source={searchIcon} style={styles.AppLogo} />
       <TextInput  
-      style={styles.textFields}
+      style={styles.searchText}
       placeholder="First Name" 
       value={this.state.values.firstName}
       onChange={(firstname)=>{this.handleFirstName(firstname)}}
@@ -103,7 +104,7 @@ render() {
       backgroundColor:'white' }}>
       </TextInput>
       <TextInput  
-      style={styles.textFields}
+      style={styles.searchText}
       placeholder="Last Name" 
       value={this.state.values.lastName}
       onChange={this.handleLastName}
@@ -128,10 +129,15 @@ render() {
 
    const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      display:'flex',
+      
       flexDirection:'row',
-      justifyContent:'space-evenly'
+      justifyContent:'space-around',
+      width:'100%',
+      paddingTop:20,
+      paddingBottom:20,
+      //flexGrow: 1,
+      
+      
     },
     AppLogo :{
       height: 20,
@@ -140,8 +146,25 @@ render() {
       marginTop:3,
       //display: 'block'
     },
+   
+  
+  
+    searchText:{
+      textAlign: 'center',
+      alignContent: 'center',
+      flex: 1,
+      height: 40,
+      color: 'black',
+      borderBottomColor: '#282c34',
+      borderBottomWidth: 1,
+      marginTop: 5,
+      marginBottom: 8
+    },
     textFields: {
-     //color:'blue'
+     //paddingTop:40,
+    
+     //height:300,
+     //flexGrow: 1,
      
 
     },
