@@ -21,20 +21,15 @@ class Table1 extends Component {
       lastIndex:10,
       rows:[],
       display:[],
-      toggle: true,
-      myFavorites:[],
-      isLiked: false,
-      activeActor: null
+      activeActor: {
+        name: '',
+        age: '',
+        profession: '',
+      }
     }
 
   }
  
-  /*ToggleFunction = () => {
-    this.setState(state => ({
-      toggle: !state.toggle
-    }));
-  };*/
-
   loadData(){
     let rows=[]
     this.props.actors.map(actor => {
@@ -58,8 +53,6 @@ class Table1 extends Component {
       this.setState({firstIndex:0}),
       this.loadData()
     }
-
-    
   }
 
   buttonClickNextPage(){
@@ -82,9 +75,14 @@ class Table1 extends Component {
   }
 
   actionOnRow(actor){
-    console.log(actor[1] + " " + actor[2] + " er " + actor[4] + " og er født i " + actor[3])
+    this.setState({
+      activeActor: {
+        name: actor[1] + " " + actor[2], 
+        age: actor[3], 
+        profession: actor[4],
+      }
+    })
   }
-
 
   render() {
     const state = this.state;
@@ -116,15 +114,22 @@ class Table1 extends Component {
      )}
         />
         <View style = {styles.buttons}>
-        <Button style={styles.prev}
-        onPress={this.buttonClickPrevPage.bind(this) } 
-        title="Previous page"
-      />
-        <Button
-        onPress={this.buttonClickNextPage.bind(this) } 
-        title="Next page"
-      />
-      </View>
+          <Button style={styles.prev}
+          onPress={this.buttonClickPrevPage.bind(this) } 
+          title="Previous page"
+          />
+          <Button
+          onPress={this.buttonClickNextPage.bind(this) } 
+          title="Next page"
+          />
+        </View>
+        <View style={styles.inputContainer}>
+            <Text style={styles.subHeadline}>More information</Text>
+            <View>
+              {this.state.activeActor.name !=='' ? <Text style={styles.infoText}>{this.state.activeActor.name+ " is a/an " + this.state.activeActor.profession + " and was born in " + this.state.activeActor.age}.</Text>
+              : <Text style={styles.infoText}>Click on a person to display more details.</Text>}
+            </View>
+        </View>
       </View>
       )
     }
@@ -180,6 +185,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     margin: 10
   },
+  infoText: {
+    justifyContent:'center',
+    textAlign: 'center'
+  },
   expand: {
     color: 'white',
     fontSize: 16,
@@ -198,5 +207,31 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent:'center',
     backgroundColor:'#ffffff',
+  },
+  inputContainer: 
+  {
+    fontSize: 15,
+    lineHeight: 40,
+    borderRadius: 4,
+    letterSpacing: 2,
+    backgroundColor: 'white',
+    textAlignVertical: 'top',
+    padding: 5,
+    textAlign: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    marginBottom: 10
+  },
+  subHeadline:{
+    fontSize: 20,
+    lineHeight: 40,
+    fontWeight: '700',
+    letterSpacing: 2,
+    color: 'black',
+    textAlign: 'center'
   },
 });
