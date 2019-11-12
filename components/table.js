@@ -5,9 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators, dispatch } from 'redux';
 import fetchActorsAction from './fetchActors'
 import { FlatList } from 'react-native-gesture-handler';
-import up from '../assets/images/up.png'
-import down from '../assets/images/down.png'
-import CollapseView from "react-native-collapse-view";
 
 
 class Table1 extends Component {
@@ -187,12 +184,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 1
   },
-  collapseView: {
-    padding: 20,
-    color: 'white',
-    backgroundColor: 'white',
-    fontSize: 18,
-  },
+
   view: {
     height:50,
     padding: 20,

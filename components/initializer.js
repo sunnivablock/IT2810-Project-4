@@ -56,13 +56,13 @@ generateURLQuery = () => {
   }
 
   fire() {
-    const {fetchActors}=this.props;
+    const {fetchActors}= this.props;
     fetchActors(this.generateURLQuery())
   }
 
 
-   handleButtonClick() {
-      this.setState({values:
+   async handleButtonClick() {
+     await this.setState({values:
         {rating:parseInt(this.props.values.rating),
         firstName: this.props.values.firstName, 
         lastName:this.props.values.lastName, 
