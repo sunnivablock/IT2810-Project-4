@@ -1,60 +1,94 @@
 import React, {Component} from 'react';  
 import {
-  Button,
   StyleSheet,
   Text,
   View,
   TextInput,
   AsyncStorage,
-  FlatList
+  TouchableOpacity
 } from 'react-native';
 
+const STORAGE_KEY = '@save_name'
+
 class FavoritesPage extends Component{
+
     constructor(props){
         super(props);
         
-
+        this.state = {
+            text: '',
+            name: ''
+          }
+        
     }
-    _storeData = async () => {
-        try {
-          await AsyncStorage.setItem('@MySuperStore:key', 'I like to save it.');
-        } catch (error) {
-          // Error saving data
-        }
-      };
     
-    _retrieveData = async () => {
-    try {
-        const value = await AsyncStorage.getItem('TASKS');
-        if (value !== null) {
-        // We have data!!
-        console.log(value);
-        }
-    } catch (error) {
-        // Error retrieving data
+    componentDidMount() {
+        this.retrieveData()
     }
-    };
 
-    /*fillList = () => {
-
-    }*/
-        
-   
-    Item({ title }) {
-        return (
-          <View style={styles.item}>
-            <Text style={styles.title}>{title}</Text>
-          </View>
-        );
+    retrieveData = async () => {
+        try {
+          const name = await AsyncStorage.getItem(STORAGE_KEY)
+    
+          if (name !== null) {
+            this.setState({ name })
+          }
+        } catch (e) {
+          alert('Failed to load name.')
+        }
+    }
+    
+    save = async name => {
+        try {
+          await AsyncStorage.setItem(STORAGE_KEY, name)
+          alert('Data successfully saved!')
+          this.setState({ name })
+        } catch (e) {
+          alert('Failed to save name.')
+        }
       }
-    render(){
-        
+
+    removeEverything = async () => {
+        try {
+          await AsyncStorage.clear()
+          alert('Storage successfully cleared!')
+        } catch (e) {
+          alert('Failed to clear the async storage.')
+        }
+    }
+    
+    onChangeText = text => this.setState({ text })
+
+    onSubmitEditing = () => {
+          const onSave = this.save
+          const { text } = this.state
+      
+          if (!text) return
+      
+          onSave(text)
+          this.setState({ text: '' })
+    }
+
+     
+
+     render() {
+        const { text, name } = this.state
         return (
             <View>
-                <Text style={styles.newPersonHeadline}>MY FAVORITES</Text>
+                <Text style={styles.newPersonHeadline}>MY FAVORITE</Text>
                 <View style={styles.favContainer}>
-               
                     
+                    <TextInput
+                        style={styles.input}
+                        value={text}
+                        placeholder='Type the name of your favorite, hit enter, and refresh'
+                        onChangeText={this.onChangeText}
+                        onSubmitEditing={this.onSubmitEditing}
+                    />
+                    <Text style={styles.text}>Current favorite: {name}</Text>
+                    <TouchableOpacity onPress={this.removeEverything} style={styles.button}>
+                        <Text style={styles.buttonText}>Clear Storage</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         )
@@ -87,18 +121,27 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10
     },
-    container: {
-    flex: 1,
+    text: {
+        fontSize: 20,
+        padding: 10,
+        backgroundColor: 'white'
     },
-    item: {
-        backgroundColor: '#f9c2ff',
-        padding: 20,
-        marginVertical: 8,
-        marginHorizontal: 16,
+    input: {
+        padding: 15,
+        height: 50,
+        borderBottomWidth: 1,
+        borderBottomColor: '#333',
+        margin: 10
     },
-    title: {
-        fontSize: 32,
+    button: {
+        margin: 10,
+        padding: 10,
+        backgroundColor: '#FF851B'
     },
+    buttonText: {
+        fontSize: 14,
+        color: '#fff'
+    }
 }); 
 
 
@@ -127,3 +170,17 @@ export default FavoritesPage;
                         title={'SUBMIT'}
                         onPress={this._storeData}
                     />*/
+/*
+keyExtractor={item => item.id}
+                */
+/*
+<List>
+                    <FlatList
+                        data={this.state.newPerson}
+                        renderItem={({ item }) => (
+                            <ListItem
+                              title={item.name}
+                            />
+                          )}
+                    />
+                </List>*/
