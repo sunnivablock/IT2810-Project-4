@@ -86,11 +86,14 @@ generateURLQuery = () => {
 
         this.fire()
       }
+
+   
       
    
   
 
   render() {
+    console.log("Hei")
 
     if(!this.shouldComponentRender()) return (<div>Appen laster ikke</div>)
     return (
