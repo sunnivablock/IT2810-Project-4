@@ -83,6 +83,7 @@ class Table1 extends Component {
 
   actionOnRow(actor){
     console.log(actor[1] + " " + actor[2] + " er " + actor[4] + " og er født i " + actor[3])
+    
   }
 
    
@@ -95,6 +96,7 @@ class Table1 extends Component {
   }
   _renderCollapseView = (collapse) => {
     let actor = [55,"Navnesen","Navn","brannmann", "1900"]
+
     return(
       <View style={styles.collapseView}>
         <Text>{actor[1] + " " + actor[2] + " er " + actor[4] + " og er født i " + actor[3]}</Text>
@@ -144,7 +146,7 @@ class Table1 extends Component {
           <TouchableWithoutFeedback onPress={ () => this.actionOnRow(item)}>
               <View style={styles.actor}>
                  <Text style={styles.actorText}>{item[0]+ " - " + item[1] + " " + item[2]}</Text>
-                 <CollapseView renderView={this._renderView} renderCollapseView={this._renderCollapseView} text={"hei"}/>
+                 <CollapseView renderView={this._renderView} renderCollapseView={this._renderCollapseView}/>
               </View>
          </TouchableWithoutFeedback>
      )}
