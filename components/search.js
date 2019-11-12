@@ -44,7 +44,6 @@ handleFirstName(e) {
        {...prevState.values, firstName: value
        }, 
      }) )
-     console.log("State:",this.state.values.firstName)
      let object = {
       rating: this.props.values.rating,
       firstName: value,
@@ -80,14 +79,13 @@ handleFirstName(e) {
 render() {
   const state = this.state;
   if (this.props.pending===true){
-    console.log("fetching data")
     return (
       <View></View>
     )}
 
   else{
     
-    console.log("Redux:",this.props.values.firstName, this.props.values.lastName)
+
 
     return (
       <View style={styles.container}>

@@ -58,20 +58,36 @@ generateURLQuery = () => {
   fire() {
     const {fetchActors}=this.props;
     fetchActors(this.generateURLQuery())
-    console.log("fire!")
-
   }
 
 
    handleButtonClick() {
-    console.log("handleButtonClick1")
-      this.setState({values:{firstName: this.props.values.firstName, 
-        lastName:this.props.values.lastName, year:parseInt(this.props.values.year),
-        rating:parseInt(this.props.values.rating), Sorting:this.props.values.Sort,
-        }},this.fire, console.log("Afterclick state",this.state.values))
-
-        
+      this.setState({values:
+        {rating:parseInt(this.props.values.rating),
+        firstName: this.props.values.firstName, 
+        lastName:this.props.values.lastName, 
+        year:parseInt(this.props.values.year),
+        Sorting:"rating", 
+        SortDirection:this.state.values.SortDirection
+        }},
+        this.fire()
+        )  
    }
+
+  async handleCheckClick(word) {
+      await this.setState({values:
+      {rating:parseInt(this.props.values.rating),
+      firstName: this.state.values.firstName, 
+      lastName:this.state.values.lastName, 
+      year:parseInt(this.props.values.year),
+      Sorting:"rating",
+      SortDirection:word,
+      }})
+
+        this.fire()
+      }
+      
+   
   
 
   render() {
@@ -80,23 +96,22 @@ generateURLQuery = () => {
     return (
       <View style= {styles.container}>
         <CheckBox
-        title='Desc'
-        checkedTitle='Asc'
-        checkedIcon={<Image source={Up} style={styles.AppLogo}/>}
-        uncheckedIcon={<Image source={Down} style={styles.AppLogo} />}
+        title='Asc'
+        checkedTitle='Desc'
+        checkedIcon={<Image source={Down} style={styles.AppLogo}/>}
+        uncheckedIcon={<Image source={Up} style={styles.AppLogo} />}
         checked={this.state.checked}
-        onPress={() => 
-          
-          {this.setState({checked: !this.state.checked}), 
-          (this.state.values.SortDirection==='descending')?(this.setState({values:{SortDirection: 'ascending'}}), console.log("Set Asc"))
-        :(this.setState({values:{SortDirection:'descending'}}), console.log("Set Desc")), console.log("immediate state:", this.state.values.SortDirection)}}
+        onPress={() => (this.setState({checked: !this.state.checked}), 
+        (this.state.checked? this.handleCheckClick("ascending"):this.handleCheckClick("descending"))
+        )}
         />
-        <Button style={styles.title} title="Search" onPress={() => (this.handleButtonClick(), 
-          console.log("Button pressed, fname:"+this.props.values.firstName))}></Button>
+
+        <Button style={styles.title} title="Search" onPress={() => (this.handleButtonClick())}></Button>
       </View>
     )
   }
 }
+
 
 const mapStateToProps = state => {
   return {
@@ -131,7 +146,6 @@ AppLogo :{
   width:20,
   resizeMode: 'contain',
   marginTop:3,
-  //display: 'block'
 },
 container: {
   flex: 1,

@@ -45,7 +45,6 @@ class Table1 extends Component {
          {...prevState.values, firstName: value
          }, 
        }) )
-       console.log("State:",this.state.values.firstName)
        let object = {
         rating: this.props.values.Rating,
         firstName: value,
@@ -64,14 +63,12 @@ class Table1 extends Component {
   render() {
     const state = this.state;
     if (this.props.pending===true){
-      console.log("fetching data")
       return (
         <View></View>
       )}
   
     else{
       let rows=[]
-      console.log("Redux:",this.props.values)
       this.props.actors.map(actor => {
         rows.push([actor.rating, actor.firstName +' '+ actor.lastName])
       })

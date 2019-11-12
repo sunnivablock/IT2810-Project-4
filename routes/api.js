@@ -33,13 +33,11 @@ router.get('/persons', async (req, res, next) => {
   
   //const person = await Person.find(content).sort({[sorting]:sortDirection});
   const person = await Person.find();
-  console.log("Prøver å printe person: " ,person)
   
   res.status(200).json(person).send();
 });
 
 router.post('/persons', (req, res, next) => {
-  console.log(req.body)
     if(req.body){
         Person.create(req.body)
         res.json("Added!")
