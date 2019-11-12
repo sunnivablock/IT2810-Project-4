@@ -13,8 +13,8 @@ import {
   TouchableOpacity,
   
 } from 'react-native';
-import Up from '../assets/images/Up.png'
-import Down from '../assets/images/Down.png'
+import Up from '../assets/images/up.png'
+import Down from '../assets/images/down.png'
 import { CheckBox } from 'react-native-elements'
 
 class Initializer extends Component {
@@ -40,11 +40,10 @@ class Initializer extends Component {
     return true;
 }
 
+//generates api-url 
 generateURLQuery = () => {
   return "http://it2810-09.idi.ntnu.no:8000/api/persons?" + ((!this.state.values.firstName) ? '' : `&firstName=${this.state.values.firstName}`)+ 
       ((!this.state.values.lastName) ? '' : `&lastName=${this.state.values.lastName}`) +
-      ((!this.state.values.rating) ? '' : `&rating=${this.state.values.rating}`) +
-      ((!this.state.values.year) ? '' : `&year=${this.state.values.year}`)+
       ((!this.state.values.Sorting) ? '' : `&sort=${this.state.values.Sorting}`)+
       ((this.state.values.SortDirection === 'ascending') ? '&sortAsc=True' : '');}
 
@@ -55,14 +54,15 @@ generateURLQuery = () => {
 
   }
 
+  //fetches from database. Used to update on serach and sorting
   fire() {
     const {fetchActors}= this.props;
     fetchActors(this.generateURLQuery())
   }
 
-
-   async handleButtonClick() {
-     await this.setState({values:
+  //handles searching on both last name and first name 
+  async handleButtonClick() {
+    await this.setState({values:
         {rating:parseInt(this.props.values.rating),
         firstName: this.props.values.firstName, 
         lastName:this.props.values.lastName, 
@@ -70,10 +70,11 @@ generateURLQuery = () => {
         Sorting:"rating", 
         SortDirection:this.state.values.SortDirection
         }},
-        this.fire()
         )  
-   }
-
+        this.fire()
+  }
+    
+//handles sorting ascending and decending on rating
   async handleCheckClick(word) {
       await this.setState({values:
       {rating:parseInt(this.props.values.rating),
@@ -93,8 +94,6 @@ generateURLQuery = () => {
   
 
   render() {
-    console.log("Hei")
-
     if(!this.shouldComponentRender()) return (<div>Appen laster ikke</div>)
     return (
       <View style= {styles.container}>
@@ -105,10 +104,8 @@ generateURLQuery = () => {
         uncheckedIcon={<Image source={Up} style={styles.AppLogo} />}
         checked={this.state.checked}
         onPress={() => (this.setState({checked: !this.state.checked}), 
-        (this.state.checked? this.handleCheckClick("ascending"):this.handleCheckClick("descending"))
-        )}
+        (this.state.checked? this.handleCheckClick("ascending"):this.handleCheckClick("descending")))}
         />
-
         <Button style={styles.title} title="Search" onPress={() => (this.handleButtonClick())}></Button>
       </View>
     )
@@ -119,7 +116,7 @@ generateURLQuery = () => {
 const mapStateToProps = state => {
   return {
   actors: state.actors.actors,
-  //error: state.actors.error,
+  error: state.actors.error,
   pending: state.actors.pending,
   values: state.values.values,
 }}

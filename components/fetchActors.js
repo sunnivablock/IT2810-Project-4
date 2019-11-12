@@ -1,5 +1,6 @@
 import {fetchActorsPending, fetchActorsSuccess, fetchActorsError} from './actions/index'
 
+//fetches celebrities from database based on the input api-url
 function fetchActors(url) {
     return dispatch => {
         dispatch(fetchActorsPending());
