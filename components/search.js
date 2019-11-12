@@ -1,6 +1,19 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {SearchSuccess} from '../components/actions/index'
+import {
+  Image,
+  Platform,
+  ScrollView,
+  TextInput,
+  Text,
+  TouchableOpacity,
+  View,
+  StyleSheet
+  
+} from 'react-native';
+
+import { SocialSentimentDissatisfied } from 'material-ui/svg-icons';
 
 
 class Search extends Component {
@@ -10,9 +23,9 @@ class Search extends Component {
        
     this.handleFirstName = this.handleFirstName.bind(this);
     this.handleLastName = this.handleLastName.bind(this);
-    this.handleRating = this.handleRating.bind(this);
-    this.handleSorting=this.handleSorting.bind(this);
-    this.handleSortDirection=this.handleSortDirection.bind(this);
+    //this.handleRating = this.handleRating.bind(this);
+    //this.handleSorting=this.handleSorting.bind(this);
+    //this.handleSortDirection=this.handleSortDirection.bind(this);
     this.state = {
       values:{
       rating: '',
@@ -24,135 +37,86 @@ class Search extends Component {
   }
   } 
 }
-      handleFirstName(e) {
-        let value = e.target.value;
-        this.setState( prevState => ({ values : 
-             {...prevState.values, firstName: value
-             }
-           }) )
-           let object = {
-            Rating: this.props.values.Rating,
-            Fornavn: value,
-            Etternavn: this.props.values.Etternavn,
-            Født: this.props.values.Født,
-            Sorting: this.props.values.Sorting,
-            SortDirection:this.props.values.SortDirection
-           }
-        this.props.dispatch(SearchSuccess(object))
-       }
-    
-       handleLastName(e) {
-        let value = e.target.value;
-        this.setState( prevState => ({ values : 
-             {...prevState.values, lastName: value
-             }
-           }))
-           let object = {
-            Rating: this.props.values.Rating,
-            Fornavn: this.props.values.Fornavn,
-            Etternavn: value,
-            Født: this.props.values.Født,
-            Sorting: this.props.values.Sorting,
-            SortDirection:this.props.values.SortDirection
-           }
-        this.props.dispatch(SearchSuccess(object))
-       }
-    
-       handleYear(e) {
-        let value = e.target.value;
-        
-        this.setState( prevState => ({ values : 
-             {...prevState.values, year: value
-             }
-           }))
-           let object = {
-            Rating: this.props.values.Rating,
-            Fornavn: this.props.values.Fornavn,
-            Etternavn: this.props.values.Etternavn,
-            Født: value,
-            Sorting: this.props.values.Sorting,
-            SortDirection:this.props.values.SortDirection
-           }
-        this.props.dispatch(SearchSuccess(object))
-       }
-    
-       handleRating(e) {
-        let value = e.target.value;
-        this.setState( prevState => ({ values : 
-             {...prevState.values, rating: value
-             }
-           }))
-
-           let object = {
-            Rating: value,
-            Fornavn: this.props.values.Fornavn,
-            Etternavn: this.props.values.Etternavn,
-            Født: this.props.values.Født,
-            Sorting: this.props.values.Sorting,
-            SortDirection:this.props.values.SortDirection
-           }
-        this.props.dispatch(SearchSuccess(object))
-       }
-
-       handleSorting(e) {
-        let value = e.target.value;
-        this.setState( prevState => ({ values : 
-          {...prevState.values, Sorting: value
-          }
-        }))
       
-           let object = {
-            Rating: this.props.values.Rating,
-            Fornavn: this.props.values.Fornavn,
-            Etternavn: this.props.values.Etternavn,
-            Født: this.props.values.Født,
-            Sorting: value,
-            SortDirection:this.props.values.SortDirection
-           }
-        this.props.dispatch(SearchSuccess(object))
-       }
-
-       handleSortDirection(e) {
-        let value = e.target.value;
-        this.setState( prevState => ({ values : 
-          {...prevState.values, SortDirection: value
-          }
-        }))
-
-           let object = {
-            Rating: this.props.values.Rating,
-            Fornavn: this.props.values.Fornavn,
-            Etternavn: this.props.values.Etternavn,
-            Født: this.props.values.Født,
-            Sorting: this.props.values.Sorting,
-            SortDirection:value
-           }
-        this.props.dispatch(SearchSuccess(object))
-       }
-      
-       render() {
-      
-         return (
-          
-            <div className="searchContainer">
-              <p className='searchHead'>SEARCH FOR PERSON</p>
-              <img src={searchLogo} className="search-logo" alt="logo"/>
-                
-              <TextInput
-                style={{height: 40}}
-                className={'searchFirstName'}
-                id="Fornavn"
-                placeholder="First Name"
-                value={this.state.values.firstName}
-                onChangeText={this.handleFirstName}
-                />
-
-
-              </div>
-            
-         )
+handleFirstName(e) {
+  let value = e.nativeEvent.text;
+  this.setState( prevState => ({ values : 
+       {...prevState.values, firstName: value
+       }, 
+     }) )
+     let object = {
+      rating: this.props.values.rating,
+      firstName: value,
+      lastName: this.props.values.lastName,
+      year: this.props.values.year,
+      Sorting: this.props.values.Sorting,
+      SortDirection:this.props.values.SortDirection
      }
-   }
+  this.props.dispatch(SearchSuccess(object))
+ }
+
+ handleLastName(e) {
+  let value = e.nativeEvent.text;
+  this.setState( prevState => ({ values : 
+       {...prevState.values, lastName: value
+       }
+     }))
+     let object = {
+      rating: this.props.values.rating,
+      firstName: this.props.values.firstName,
+      lastName: value,
+      year: this.props.values.year,
+      Sorting: this.props.values.Sorting,
+      SortDirection:this.props.values.SortDirection
+     }
+  this.props.dispatch(SearchSuccess(object))
+ }
+
+
+
+
+
+render() {
+  const state = this.state;
+  if (this.props.pending===true){
+    return (
+      <View></View>
+    )}
+
+  else{
+    
+
+
+    return (
+      <View style={styles.container}>
+      
+      
+      <TextInput  
+      style={styles.textFields}
+      placeholder="First Name" 
+      value={this.state.values.firstName}
+      onChange={(firstname)=>{this.handleFirstName(firstname)}}
+      id="First Name"
+      style={{ height: 40, 
+      borderColor: 'gray', 
+      borderWidth: 1,
+      backgroundColor:'white' }}>
+      </TextInput>
+      <TextInput  
+      style={styles.textFields}
+      placeholder="Last Name" 
+      value={this.state.values.lastName}
+      onChange={this.handleLastName}
+      id="Last Name"
+      style={{ height: 40, 
+      borderColor: 'gray', 
+      borderWidth: 1,
+      backgroundColor:'white' }}>
+      </TextInput>
+      
+      </View>
+    )}}
+      }
    
    
    const mapStateToProps = state => ({
@@ -161,3 +125,24 @@ class Search extends Component {
 
 
    export default connect(mapStateToProps)(Search)
+
+   const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      display:'flex',
+      flexDirection:'row',
+      justifyContent:'space-evenly'
+    },
+    AppLogo :{
+      height: 20,
+      width:20,
+      resizeMode: 'contain',
+      marginTop:3,
+      //display: 'block'
+    },
+    textFields: {
+     //color:'blue'
+     
+
+    },
+  })

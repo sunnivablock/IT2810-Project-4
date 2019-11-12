@@ -3,13 +3,15 @@ import React from 'react';
 import Header from '../components/header'
 import Table from '../components/table'
 import Initializer from '../components/initializer'
-//import Search from '../components/search'
+import Search from '../components/search'
+import searchIcon from '../assets/images/search-icon.png'
 import {
   Platform,
   ScrollView,
   StyleSheet,
   Text,
   View,
+  Image,
 } from 'react-native';
 
 import { TextInput } from 'react-native-gesture-handler';
@@ -21,8 +23,14 @@ export default function HomeScreen() {
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
-        <Initializer/>
         <Header/>
+        <View style={styles.sContainer}>
+          <View style={styles.searchBar}>
+          <Image source={searchIcon} style={styles.AppLogo} />
+            <Search/>
+            <Initializer/>
+          </View>
+        </View>
         <Table/>
       </ScrollView>
     </View>
@@ -72,6 +80,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#282c34',
+    
   },
   developmentModeText: {
     marginBottom: 20,
@@ -89,6 +98,13 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
+  },
+  AppLogo :{
+    height: 40,
+    width:40,
+    resizeMode: 'contain',
+    marginTop:3,
+    //display: 'block'
   },
   getStartedContainer: {
     alignItems: 'center',
@@ -143,5 +159,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#282c34',
     justifyContent: 'center'
     
-  }
+  },
+  searchBar: {
+    flex: 1,
+    display:'flex',
+    flexDirection:'row',
+    //width:600,
+    
+    //height:30,
+    //padding:30,
+    backgroundColor:'white',
+    alignItems:'center',
+  },
+  sContainer:{
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'space-evenly'
+  },
 });
