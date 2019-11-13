@@ -1,7 +1,21 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {SearchSuccess} from '../components/actions/index'
-import {TextInput, View, StyleSheet} from 'react-native';
+import {
+  Image,
+  Platform,
+  ScrollView,
+  TextInput,
+  Text,
+  TouchableOpacity,
+  View,
+  StyleSheet
+  
+} from 'react-native';
+
+import { SocialSentimentDissatisfied } from 'material-ui/svg-icons';
+import searchIcon from '../assets/images/search-icon.png'
+
 
 class Search extends Component {
  
@@ -69,27 +83,23 @@ render() {
   else{
     return (
       <View style={styles.container}>
+      
+      <Image source={searchIcon} style={styles.AppLogo} />
       <TextInput  
-      style={styles.textFields}
+      
       placeholder="First Name" 
       value={this.state.values.firstName}
       onChange={(firstname)=>{this.handleFirstName(firstname)}}
       id="First Name"
-      style={{ height: 40, 
-      borderColor: 'gray', 
-      borderWidth: 1,
-      backgroundColor:'white' }}>
+      style={styles.searchText }>
       </TextInput>
       <TextInput  
-      style={styles.textFields}
+      
       placeholder="Last Name" 
       value={this.state.values.lastName}
       onChange={this.handleLastName}
       id="Last Name"
-      style={{ height: 40, 
-      borderColor: 'gray', 
-      borderWidth: 1,
-      backgroundColor:'white' }}>
+      style={styles.searchText}>
       </TextInput>
       
       </View>
@@ -106,16 +116,35 @@ render() {
 
    const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      display:'flex',
+      
       flexDirection:'row',
-      justifyContent:'space-evenly'
+      justifyContent:'space-around',
+      width:'100%',
+      paddingTop:20,
+      paddingBottom:20,
+      //flexGrow: 1,
+      
+      
     },
     AppLogo :{
-      height: 20,
-      width:20,
+      height: 40,
+      width:40,
       resizeMode: 'contain',
       marginTop:3,
+    },
+   
+  
+  
+    searchText:{
+      textAlign: 'center',
+      alignContent: 'center',
+      flex: 1,
+      height: 40,
+      color: 'black',
+      borderBottomColor: '#282c34',
+      borderBottomWidth: 1,
+      marginTop: 5,
+      marginBottom: 8
     },
     textFields: {
      
