@@ -3,11 +3,8 @@ import React, {Component} from 'react';
 import brad from '../assets/images/brad.png'
 import {
     Image,
-    Platform,
-    ScrollView,
     StyleSheet,
     Text,
-    TouchableOpacity,
     View,
   } from 'react-native';
 

@@ -24,9 +24,6 @@ class Search extends Component {
        
     this.handleFirstName = this.handleFirstName.bind(this);
     this.handleLastName = this.handleLastName.bind(this);
-    //this.handleRating = this.handleRating.bind(this);
-    //this.handleSorting=this.handleSorting.bind(this);
-    //this.handleSortDirection=this.handleSortDirection.bind(this);
     this.state = {
       values:{
       rating: '',
@@ -38,10 +35,11 @@ class Search extends Component {
   }
   } 
 }
-      
-handleFirstName(e) {
+
+//handles input from user in tekxtfield (first name)
+async handleFirstName(e) {
   let value = e.nativeEvent.text;
-  this.setState( prevState => ({ values : 
+  await this.setState( prevState => ({ values : 
        {...prevState.values, firstName: value
        }, 
      }) )
@@ -56,9 +54,10 @@ handleFirstName(e) {
   this.props.dispatch(SearchSuccess(object))
  }
 
- handleLastName(e) {
+//handles input from user in textfield (last name)
+ async handleLastName(e) {
   let value = e.nativeEvent.text;
-  this.setState( prevState => ({ values : 
+  await this.setState( prevState => ({ values : 
        {...prevState.values, lastName: value
        }
      }))
@@ -74,9 +73,6 @@ handleFirstName(e) {
  }
 
 
-
-
-
 render() {
   const state = this.state;
   if (this.props.pending===true){
@@ -85,9 +81,6 @@ render() {
     )}
 
   else{
-    
-
-
     return (
       <View style={styles.container}>
       
@@ -138,7 +131,6 @@ render() {
       width:40,
       resizeMode: 'contain',
       marginTop:3,
-      //display: 'block'
     },
    
   
@@ -155,11 +147,6 @@ render() {
       marginBottom: 8
     },
     textFields: {
-     //paddingTop:40,
-    
-     //height:300,
-     //flexGrow: 1,
      
-
     },
   })

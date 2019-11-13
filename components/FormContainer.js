@@ -129,7 +129,6 @@ class FormContainer extends Component {
 render() {
   const { firstName, lastName, profession, year, rating } = this.state.newPerson;
   const isEnabled = (firstName !=="" && lastName !=="" && profession !=="" && year !=="" && rating !=="");
-  console.log("inni render til formcontainer")
   
   const ratingOptions = [];
   for(var i=1; i<101; i++){
