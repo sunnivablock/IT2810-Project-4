@@ -91,14 +91,7 @@ class FormContainer extends Component {
     }))
   }
 
-  /*handleFormSubmit = () => {
-    let personData = this.state.newPerson;
-    console.log(personData)
-    console.log("submit button pushed")
-    axios.post('http://it2810-09.idi.ntnu.no:8000/api/persons?', personData)
-    console.log('Database-POST utprøvd')
-    this.handleClearForm();
-  }*/
+
 
   handleFormSubmit(){
     fetch('http://it2810-09.idi.ntnu.no:8000/api/persons', {
@@ -122,7 +115,6 @@ class FormContainer extends Component {
 
   handleClearForm() {
     // Logic for resetting the form
-    console.log("clear called")
     this.setState({ 
       newPerson: {
         firstName: '',
@@ -286,16 +278,3 @@ const styles = StyleSheet.create({
 });
 
 export default FormContainer;
-
-/*
-<Button style={styles.button}
-          title="CLEAR"
-          onPress={this.handleClearForm}
-          color="#696969" />*/
-/*
-<Button style={styles.button}
-            title={'SUBMIT'}
-            onPress={this.handleFormSubmit}
-            color={'#696969'}
-            disabled = {!isEnabled}
-/>*/

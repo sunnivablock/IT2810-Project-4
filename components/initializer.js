@@ -99,10 +99,10 @@ generateURLQuery = () => {
       <View style= {styles.container}>
       
 
-        <Button style={styles.title} title="Search" onPress={() => (this.handleButtonClick())}></Button>
+        <Button style={styles.button} color='black' title="Search" onPress={() => (this.handleButtonClick())}></Button>
         <CheckBox
-        title='Asc'
-        checkedTitle='Desc'
+        title='Ascending'
+        checkedTitle='Descending'
         checkedIcon={<Image source={Down} style={styles.AppLogo}/>}
         uncheckedIcon={<Image source={Up} style={styles.AppLogo} />}
         checked={this.state.checked}
@@ -110,6 +110,7 @@ generateURLQuery = () => {
         (this.state.checked? this.handleCheckClick("ascending"):this.handleCheckClick("descending"))
         )}
         />
+        <Text style={styles.writing}>Sort by rating in decending or ascending order</Text>
       </View>
     )
   }
@@ -143,6 +144,20 @@ title: {
   overlayColor:'red',
   width: 40,
   height:10
+},
+writing:{
+  width:170,
+  color:'gray', 
+  marginBottom: 20,
+},
+button: {
+  borderRadius: 10,
+  margin: 20,
+  marginTop: 20,
+  padding: 20,
+  color: 'black',
+  borderColor: '#282c34',
+  borderWidth: 1
 },
 AppLogo :{
   height: 20,

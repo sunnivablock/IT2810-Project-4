@@ -93,26 +93,20 @@ render() {
       
       <Image source={searchIcon} style={styles.AppLogo} />
       <TextInput  
-      style={styles.searchText}
+      
       placeholder="First Name" 
       value={this.state.values.firstName}
       onChange={(firstname)=>{this.handleFirstName(firstname)}}
       id="First Name"
-      style={{ height: 40, 
-      borderColor: 'gray', 
-      borderWidth: 1,
-      backgroundColor:'white' }}>
+      style={styles.searchText }>
       </TextInput>
       <TextInput  
-      style={styles.searchText}
+      
       placeholder="Last Name" 
       value={this.state.values.lastName}
       onChange={this.handleLastName}
       id="Last Name"
-      style={{ height: 40, 
-      borderColor: 'gray', 
-      borderWidth: 1,
-      backgroundColor:'white' }}>
+      style={styles.searchText}>
       </TextInput>
       
       </View>
@@ -140,8 +134,8 @@ render() {
       
     },
     AppLogo :{
-      height: 20,
-      width:20,
+      height: 40,
+      width:40,
       resizeMode: 'contain',
       marginTop:3,
       //display: 'block'

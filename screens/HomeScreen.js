@@ -26,7 +26,7 @@ export default function HomeScreen() {
         <Header/>
         <View style={styles.sContainer}>
           <View style={styles.searchBar}>
-          
+            <Text style={styles.searchHeader}>SEARCH</Text>
             <Search/>
             <Initializer/>
           </View>
@@ -127,6 +127,12 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     textAlign: 'center',
   },
+  searchHeader:{
+    fontSize: 18,
+    lineHeight: 40,
+    fontWeight: '700',
+    letterSpacing: 2
+  },
   tabBarInfoContainer: {
     position: 'absolute',
     bottom: 0,
@@ -165,9 +171,13 @@ const styles = StyleSheet.create({
     display:'flex',
     flexDirection:'column',
     width:'90%',
-    
+    //border:''
+    borderRadius: 10,
+    borderBottomColor: '#282c34',
+    borderBottomWidth: 1,
     //height:30,
-    //padding:30,
+    height:'100%',
+    marginTop:'7%',
     backgroundColor: 'white', 
     alignItems:'center',
     

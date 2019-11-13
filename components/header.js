@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     marginRight: '1%',
     marginTop: 20,
     color:'white',
-    //fontFamily: 'Georgia',
     fontSize: 22,
     lineHeight: 40,
     fontWeight: '700',
@@ -52,7 +51,6 @@ const styles = StyleSheet.create({
     width:100,
     resizeMode: 'contain',
     marginTop:3,
-    //display: 'block'
   }
 
 })

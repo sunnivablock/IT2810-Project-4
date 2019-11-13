@@ -109,18 +109,20 @@ class Table1 extends Component {
           </TouchableWithoutFeedback>
      )}
         />
-        <View style = {styles.buttons}>
+        <View style = {styles.buttons} >
           <Button style={styles.prev}
           onPress={this.buttonClickPrevPage.bind(this) } 
           title="Previous page"
+          color='black'
           />
           <Button
           onPress={this.buttonClickNextPage.bind(this) } 
           title="Next page"
+          color='black'
           />
         </View>
         <View style={styles.inputContainer}>
-            <Text style={styles.subHeadline}>More information</Text>
+            <Text style={styles.subHeadline}>More Information</Text>
             <View>
               {this.state.activeActor.name !=='' ? <Text style={styles.infoText}>{this.state.activeActor.name+ " is a/an " + this.state.activeActor.profession + " and was born in " + this.state.activeActor.age}.</Text>
               : <Text style={styles.infoText}>Click on a person to display more details.</Text>}
