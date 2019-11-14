@@ -1,22 +1,11 @@
 import React, {Component} from 'react';  
 import {
-  Image,
-  Platform,
-  ScrollView,
+  Button,
   StyleSheet,
   Text,
-  TouchableOpacity,
+  TextInput,
   View,
-  
 } from 'react-native';
-
-//import axios from 'axios';
-
-/* Import Components; These are our dumb components. They are stateless functional components. */
-import Button from './Button'
-import Input from './Input'; 
-import Select from './Select';
-
 
 class FormContainer extends Component {  
   constructor(props) {
@@ -31,6 +20,7 @@ class FormContainer extends Component {
         rating: '',
       },
     }
+    
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleClearForm = this.handleClearForm.bind(this);
     this.handleAge = this.handleAge.bind(this);
@@ -43,7 +33,14 @@ class FormContainer extends Component {
     
   }
 
-  /* This life cycle hook gets executed when the component mounts */
+  // Functions for handling actions to form
+  addRatingOptions(){
+      const ratingOptions = [];
+      for(var i=1; i<101; i++){
+        ratingOptions.push(i);
+      }
+      return ratingOptions;
+    }
 
   handleFirstName(e) {
     let value = e.target.value;
@@ -53,14 +50,6 @@ class FormContainer extends Component {
        }))
    }
    
-   addRatingOptions(){
-     const ratingOptions = [];
-     for(var i=1; i<101; i++){
-       ratingOptions.push(i);
-     }
-     return ratingOptions;
-   }
-
    handleLastName(e) {
     let value = e.target.value;
     this.setState( prevState => ({ newPerson : 
@@ -102,23 +91,31 @@ class FormContainer extends Component {
     }))
   }
 
-  handleFormSubmit = () => {
-    let personData = this.state.newPerson;
-    console.log(personData)
-    //axios.post('http://it2810-09.idi.ntnu.no:8000/api/persons?', personData)
-      //.then(response => {
-        //response.then(data =>{
-        //console.log("Successful" + data);
-      //})
-     // })
-      .catch(err => {
-        return console.log(err+'Could not post to db.');
+
+  handleFormSubmit(){
+    fetch('http://it2810-09.idi.ntnu.no:8000/api/persons', {
+      // create a POST request to the above url
+      method: 'POST', 
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      // Data to be sent 
+      body: JSON.stringify({ 
+        "firstName": this.state.newPerson.firstName,
+        "lastName": this.state.newPerson.lastName,
+        "profession": this.state.newPerson.profession,
+        "year": this.state.newPerson.year,
+        "rating": this.state.newPerson.rating,
       })
+    })
+    .then(response => response.json()) 
+    .then(serverResponse => console.warn(serverResponse))
+    .then(this.handleClearForm())
   }
 
-  handleClearForm(e) {
+  handleClearForm() {
     // Logic for resetting the form
-    e.preventDefault(); //prevents the page from being refreshed on form submission, which is the default form behavior.
     this.setState({ 
       newPerson: {
         firstName: '',
@@ -131,77 +128,150 @@ class FormContainer extends Component {
 }
 
 render() {
+  // Checking whether submit-button should be disabled or not
   const { firstName, lastName, profession, year, rating } = this.state.newPerson;
   const isEnabled = (firstName !=="" && lastName !=="" && profession !=="" && year !=="" && rating !=="");
   
+  const ratingOptions = [];
+  for(var i=1; i<101; i++){
+    ratingOptions.push(i.toString());
+  }
+
   return (
-      <View /*className="formContainer"*/>
-        <Text /*className='formHeader'*/>ADD NEW PERSON</Text>
+      <View style={styles.container}>
+        <Text style={styles.newPersonHeadline}>ADD NEW PERSON</Text>
+        <View style={styles.inputContainer}>
         
-        <Input 
-          inputType={'text'}
-          //className={'firstNameInput'}
-          title= {'First name '} 
-          name= {'firstName'}
-          value={this.state.newPerson.firstName} 
-          placeholder = {'John'}
-          handleChange = {this.handleFirstName}/> {/* First name of the user */}
-        
-        <Input 
-          inputType={'text'}
-          //className={'lastNameInput'}
-          title= {'Last name '} 
-          name= {'lastName'}
-          value={this.state.newPerson.lastName} 
-          placeholder = {'Smith'}
-          handleChange = {this.handleLastName}/> {/* Last name of the user */}
+        <Text style={styles.textHeader}>FIRST NAME</Text>
+          <TextInput style={styles.textInput}
+            title= {'First name '} 
+            name= {'firstName'}
+            value={this.state.newPerson.firstName} 
+            placeholder = {'John'}
+            onChange = {this.handleFirstName}/> 
+          
+          <Text style={styles.textHeader}>LAST NAME</Text>
+          <TextInput style={styles.textInput}
+            title= {'Last name '} 
+            name= {'lastName'}
+            value={this.state.newPerson.lastName} 
+            placeholder = {'Smith'}
+            onChange = {this.handleLastName}/> 
+         
+          <Text style={styles.textHeader}>BIRTH YEAR</Text>
+          <TextInput style={styles.textInput}
+            name = {'age'}
+            title = {'Birth year '} 
+            maxLength = {4}
+            value = {this.state.newPerson.age} 
+            placeholder = {'1900'}
+            onChange ={this.handleAge} />
+          
+          <Text style={styles.textHeader}>PROFESSION</Text>
+          <TextInput style={styles.textInput}
+            name={'profession'}
+            title= {'Profession '} 
+            value={this.state.newPerson.profession} 
+            placeholder = {'Pimp'}
+            onChange ={this.handleProfession} /> 
 
-        <Input 
-          inputType={'number'} 
-          name={'age'}
-          //className={'ageInput'}
-          title= {'Birth year '} 
-          maxLength = {'4'}
-          value={this.state.newPerson.age} 
-          placeholder = {'1900'}
-          handleChange={this.handleAge} /> {/* Age */} 
-        
-        <Input 
-          inputType={'text'} 
-          //className={'professionInput'}
-          name={'profession'}
-          title= {'Profession '} 
-          value={this.state.newPerson.profession} 
-          placeholder = {'Pimp'}
-          handleChange={this.handleProfession} /> {/* Profession */} 
-        
-        <Select 
-          title={'Rating'}
-          //className={'ratingInput'}
-          name={'rating'}
-          options = {this.addRatingOptions()} 
-          value = {this.state.newPerson.rating}
-          placeholder = {'55'}
-          handleChange = {this.handleRating}
-          /> {/* Rating selection */}
+          <Text style={styles.textHeader}>RATING</Text>
+          <TextInput style={styles.textInput}
+            name = {'rating'}
+            title= {'Rating '} 
+            maxLength = {3}
+            value = {this.state.newPerson.rating} 
+            placeholder = {'1-100'}
+            onChange = {this.handleRating}/> 
 
-        <Button 
-          action = {this.handleFormSubmit}
-          //className = {'submitButton'}
-          type = {'primary'}
-          title = {'Submit'} 
-          disabled = {!isEnabled}/> { /*Submit */ }
-      
-        <Button 
-          action = {this.handleClearForm}
-          //className = {'clearButton'}
-          type = {'secondary'}
-          title = {'Clear'}/> {/* Clear the form */}
+          <Button 
+            style={styles.button}
+            title={'SUBMIT'}
+            onPress={this.handleFormSubmit}
+            disabled={!isEnabled}
+          />
         
+        </View>
       </View>
   );
 }
 }
+const styles = StyleSheet.create({
+  
+  button: {
+    borderRadius: 10,
+    margin: 20,
+    marginTop: 20,
+    padding: 20,
+    color: 'black',
+    borderColor: '#282c34',
+    borderWidth: 1
+  },
+
+  textInput: {
+    textAlign: 'center',
+    alignContent: 'center',
+    flex: 1,
+    height: 40,
+    color: 'black',
+    borderBottomColor: '#282c34',
+    borderBottomWidth: 1,
+    marginTop: 5,
+    marginBottom: 8
+  },
+
+  textHeader: {
+    color: 'black',
+    textAlign: 'center',
+    letterSpacing: 2,
+  },
+
+  container: { 
+    flex: 1, 
+    padding: 16, 
+    paddingTop: 30, 
+    backgroundColor: '#282c34', 
+    height: 600,
+  },
+
+  head: { 
+    height: 40, 
+    backgroundColor: 'grey' 
+  },
+
+  text: { 
+    margin: 6 , 
+    color:'white'
+  },
+
+  inputContainer: 
+  {
+    fontSize: 15,
+    lineHeight: 40,
+    borderRadius: 4,
+    letterSpacing: 2,
+    backgroundColor: 'white',
+    textAlignVertical: 'top',
+    padding: 5,
+    textAlign: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    marginBottom: 10
+  },
+
+  newPersonHeadline:
+  {
+    fontSize: 25,
+    lineHeight: 40,
+    fontWeight: '700',
+    letterSpacing: 2,
+    color: 'white',
+    textAlign: 'center'
+  }
+});
 
 export default FormContainer;
-

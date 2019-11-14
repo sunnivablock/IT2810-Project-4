@@ -7,7 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import  store from './components/store/index';
-import Table from './components/table'
+import Initializer from './components/initializer'
 
 import AppNavigator from './navigation/AppNavigator';
 

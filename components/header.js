@@ -3,11 +3,8 @@ import React, {Component} from 'react';
 import brad from '../assets/images/brad.png'
 import {
     Image,
-    Platform,
-    ScrollView,
     StyleSheet,
     Text,
-    TouchableOpacity,
     View,
   } from 'react-native';
 
@@ -29,31 +26,28 @@ const styles = StyleSheet.create({
     display: 'flex',
     overflow: 'hidden',
     flexDirection: 'row',
-    //backgroundImage: 'linear-gradient(black, #282c34)',
-    paddingTop: '2%',
-    color: 'white',
-    //width: 100,
+    paddingTop: 30, 
     justifyContent: 'center',
-    //minWidth: '775px'
+    alignContent: 'center'
   },
   firstHeader:{
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    //fontFamily: 'Georgia',
-    //letterSpacing: '6px',
-    marginLeft: '4%',
-    marginRight: '4%',
+    marginLeft: '1%',
+    marginRight: '1%',
+    marginTop: 20,
     color:'white',
-
-    //verticalAlign: 'middle'
+    fontSize: 22,
+    lineHeight: 40,
+    fontWeight: '700',
+    letterSpacing: 2
   },
   AppLogo :{
     height: 80,
     width:100,
     resizeMode: 'contain',
     marginTop:3,
-    //display: 'block'
   }
 
 })

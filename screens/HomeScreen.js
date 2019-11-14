@@ -1,20 +1,17 @@
-import * as WebBrowser from 'expo-web-browser';
-//import Table from '../components/table'
+
 import React from 'react';
-import FormContainer from '../components/FormContainer'
 import Header from '../components/header'
 import Table from '../components/table'
+import Initializer from '../components/initializer'
+import Search from '../components/search'
 import {
-  Image,
   Platform,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 
-import { MonoText } from '../components/StyledText';
 
 export default function HomeScreen() {
   return (
@@ -22,24 +19,16 @@ export default function HomeScreen() {
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
-
-      <Header/>
-      <Table/>
-
-      </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          Tabs
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>
-            navigation/MainTabNavigator.js
-          </MonoText>
+        <Header/>
+        <View style={styles.sContainer}>
+          <View style={styles.searchBar}>
+            <Text style={styles.searchHeader}>SEARCH</Text>
+            <Search/>
+            <Initializer/>
+          </View>
         </View>
-      </View>
+        <Table/>
+      </ScrollView>
     </View>
   );
 }
@@ -48,40 +37,6 @@ HomeScreen.navigationOptions = {
   header: null,
 };
 
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
-
-    return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use
-        useful development tools. {learnMoreButton}
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
-    );
-  }
-}
-
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/development-mode/'
-  );
-}
-
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/up-and-running/#cant-see-your-changes'
-  );
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -105,6 +60,11 @@ const styles = StyleSheet.create({
     marginTop: 3,
     marginLeft: -10,
   },
+  AppLogo :{
+    height: 40,
+    resizeMode: 'contain',
+    marginTop:3,
+  },
   getStartedContainer: {
     alignItems: 'center',
     marginHorizontal: 50,
@@ -125,6 +85,12 @@ const styles = StyleSheet.create({
     color: 'white',
     lineHeight: 24,
     textAlign: 'center',
+  },
+  searchHeader:{
+    fontSize: 18,
+    lineHeight: 40,
+    fontWeight: '700',
+    letterSpacing: 2
   },
   tabBarInfoContainer: {
     position: 'absolute',
@@ -151,12 +117,28 @@ const styles = StyleSheet.create({
     color: 'rgba(96,100,109, 1)',
     textAlign: 'center',
   },
- 
   header1:{
     display:'flex',
     flexDirection:'row',
     backgroundColor: '#282c34',
     justifyContent: 'center'
-    
-  }
+  },
+  searchBar: {
+    flex: 1,
+    display:'flex',
+    flexDirection:'column',
+    width:'90%',
+    borderRadius: 10,
+    borderBottomColor: '#282c34',
+    borderBottomWidth: 1,
+    height:'100%',
+    marginTop:'7%',
+    backgroundColor: 'white', 
+    alignItems:'center',
+  },
+  sContainer:{
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'space-evenly'
+  },
 });
