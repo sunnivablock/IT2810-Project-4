@@ -13,8 +13,8 @@ import {
   TouchableOpacity,
   
 } from 'react-native';
-import Up from '../assets/images/up.png'
-import Down from '../assets/images/down.png'
+import Up from '../assets/images/Up.png'
+import Down from '../assets/images/Down.png'
 import { CheckBox } from 'react-native-elements'
 
 class Initializer extends Component {
@@ -88,11 +88,6 @@ generateURLQuery = () => {
         this.fire()
       }
 
-   
-      
-   
-  
-
   render() {
 
     if(!this.shouldComponentRender()) return (<div>Appen laster ikke</div>)
@@ -100,15 +95,15 @@ generateURLQuery = () => {
       <View style= {styles.container}>
       
 
-        <Button style={styles.button} color='black' title="Search" onPress={() => (this.handleButtonClick())}></Button>
+        <Button style={styles.button} title="Search" onPress={() => (this.handleButtonClick())}></Button>
         <CheckBox
-        title='Ascending'
-        checkedTitle='Descending'
-        checkedIcon={<Image source={Down} style={styles.AppLogo}/>}
-        uncheckedIcon={<Image source={Up} style={styles.AppLogo} />}
-        checked={this.state.checked}
-        onPress={() => (this.setState({checked: !this.state.checked}), 
-        (this.state.checked? this.handleCheckClick("ascending"):this.handleCheckClick("descending")))}
+          title='Ascending'
+          checkedTitle='Descending'
+          checkedIcon={<Image source={Down} style={styles.AppLogo}/>}
+          uncheckedIcon={<Image source={Up} style={styles.AppLogo} />}
+          checked={this.state.checked}
+          onPress={() => (this.setState({checked: !this.state.checked}), 
+          (this.state.checked? this.handleCheckClick("ascending"):this.handleCheckClick("descending")))}
         />
         <Text style={styles.writing}>Sort by rating in decending or ascending order</Text>
       </View>
@@ -155,8 +150,8 @@ button: {
   margin: 20,
   marginTop: 20,
   padding: 20,
-  color: 'black',
-  borderColor: '#282c34',
+  color: 'white',
+  backgroundColor: '#FF851B',
   borderWidth: 1
 },
 AppLogo :{

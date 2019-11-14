@@ -10,6 +10,7 @@ import {
 
 const STORAGE_KEY = '@save_name'
 
+// Functionality for adding a favorite to AsyncStorage
 class FavoritesPage extends Component{
 
     constructor(props){
@@ -19,13 +20,13 @@ class FavoritesPage extends Component{
             text: '',
             name: ''
           }
-        
     }
     
     componentDidMount() {
         this.retrieveData()
     }
-
+    
+    //fetch from AsyncStorage
     retrieveData = async () => {
         try {
           const name = await AsyncStorage.getItem(STORAGE_KEY)
@@ -38,6 +39,7 @@ class FavoritesPage extends Component{
         }
     }
     
+    // save to AsyncStorage
     save = async name => {
         try {
           await AsyncStorage.setItem(STORAGE_KEY, name)
@@ -48,6 +50,7 @@ class FavoritesPage extends Component{
         }
       }
 
+    // remove from AsyncStorage
     removeEverything = async () => {
         try {
           await AsyncStorage.clear()
@@ -70,8 +73,7 @@ class FavoritesPage extends Component{
           this.setState({ text: '' })
     }
 
-     
-
+    
      render() {
         const { text, name } = this.state
         return (

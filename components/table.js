@@ -113,16 +113,16 @@ class Table1 extends Component {
           </TouchableWithoutFeedback>
      )}
         />
-        <View style = {styles.buttons} >
-          <Button style={styles.prev}
+        <View style = {styles.buttonView}>
+          <Button 
+          style={styles.navButtons}
           onPress={this.buttonClickPrevPage.bind(this) } 
           title="Previous page"
-          color='black'
           />
           <Button
+          style = {styles.navButtons}
           onPress={this.buttonClickNextPage.bind(this) } 
           title="Next page"
-          color='black'
           />
         </View>
         <View style={styles.inputContainer}>
@@ -190,14 +190,19 @@ const styles = StyleSheet.create({
     padding:5,
     marginLeft:21
   },
-
   buttons:{
     flexDirection: 'row',
     justifyContent: 'space-between',
+    color: 'white',
   },
-  prev: {
-    color:'white',
-    fontSize:18,
+  buttonView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  navButtons: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: '600',
   },
   expandButton: {
     color: 'white',
@@ -217,7 +222,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 1
   },
-
   view: {
     height:50,
     padding: 20,

@@ -20,6 +20,7 @@ class FormContainer extends Component {
         rating: '',
       },
     }
+    
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleClearForm = this.handleClearForm.bind(this);
     this.handleAge = this.handleAge.bind(this);
@@ -32,7 +33,7 @@ class FormContainer extends Component {
     
   }
 
-  /* This life cycle hook gets executed when the component mounts */
+  // Functions for handling actions to form
   addRatingOptions(){
       const ratingOptions = [];
       for(var i=1; i<101; i++){
@@ -91,15 +92,16 @@ class FormContainer extends Component {
   }
 
 
-
   handleFormSubmit(){
     fetch('http://it2810-09.idi.ntnu.no:8000/api/persons', {
-      method: 'POST', // Here you're saying that you want to make a POST request. Could be any method, like a GET, for example.
+      // create a POST request to the above url
+      method: 'POST', 
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ // Here's the fun part. Put your data here.
+      // Data to be sent 
+      body: JSON.stringify({ 
         "firstName": this.state.newPerson.firstName,
         "lastName": this.state.newPerson.lastName,
         "profession": this.state.newPerson.profession,
@@ -126,6 +128,7 @@ class FormContainer extends Component {
 }
 
 render() {
+  // Checking whether submit-button should be disabled or not
   const { firstName, lastName, profession, year, rating } = this.state.newPerson;
   const isEnabled = (firstName !=="" && lastName !=="" && profession !=="" && year !=="" && rating !=="");
   
@@ -220,9 +223,7 @@ const styles = StyleSheet.create({
   textHeader: {
     color: 'black',
     textAlign: 'center',
-    //fontFamily: 'Georgia',
     letterSpacing: 2,
-
   },
 
   container: { 
@@ -245,7 +246,6 @@ const styles = StyleSheet.create({
 
   inputContainer: 
   {
-    //fontFamily: 'Georgia',
     fontSize: 15,
     lineHeight: 40,
     borderRadius: 4,
@@ -265,7 +265,6 @@ const styles = StyleSheet.create({
 
   newPersonHeadline:
   {
-    //fontFamily: 'Georgia',
     fontSize: 25,
     lineHeight: 40,
     fontWeight: '700',
