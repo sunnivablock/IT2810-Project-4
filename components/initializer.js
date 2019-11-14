@@ -95,7 +95,7 @@ generateURLQuery = () => {
       <View style= {styles.container}>
       
 
-        <Button style={styles.button} title="Search" onPress={() => (this.handleButtonClick())}></Button>
+        <Button style={styles.button} title="Search"  backgroundColor='red' onPress={() => (this.handleButtonClick())}></Button>
         <CheckBox
           title='Ascending'
           checkedTitle='Descending'

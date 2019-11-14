@@ -21,7 +21,6 @@ class Search extends Component {
  
  constructor(props){
     super(props);
-       
     this.handleFirstName = this.handleFirstName.bind(this);
     this.handleLastName = this.handleLastName.bind(this);
     this.state = {

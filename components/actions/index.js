@@ -33,25 +33,7 @@ export function fetchActorsError(error) {
 }
 
 
-export function fetchTopActorsPending() {
-    return {
-        type: FETCH_TOPACTORS_PENDING
-    }
-}
 
-export function fetchTopActorsSuccess(topactors) {
-    return {
-        type: FETCH_TOPACTORS_SUCCESS,
-        payload: topactors
-    }
-}
-
-export function fetchTopActorsError(error) {
-    return {
-        type: FETCH_TOPACTORS_ERROR,
-        error: error
-    }
-}
 
 export function SearchPending() {
     return {
