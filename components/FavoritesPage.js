@@ -52,6 +52,7 @@ class FavoritesPage extends Component{
         try {
           await AsyncStorage.clear()
           alert('Storage successfully cleared!')
+          this.setState({ name: '' })
         } catch (e) {
           alert('Failed to clear the async storage.')
         }

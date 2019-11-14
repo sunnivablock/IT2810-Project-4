@@ -6,7 +6,6 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import axios from 'axios';
 
 class FormContainer extends Component {  
   constructor(props) {
