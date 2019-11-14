@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 import { SocialSentimentDissatisfied } from 'material-ui/svg-icons';
+import searchIcon from '../assets/images/search-icon.png'
 
 
 class Search extends Component {
@@ -23,9 +24,6 @@ class Search extends Component {
        
     this.handleFirstName = this.handleFirstName.bind(this);
     this.handleLastName = this.handleLastName.bind(this);
-    //this.handleRating = this.handleRating.bind(this);
-    //this.handleSorting=this.handleSorting.bind(this);
-    //this.handleSortDirection=this.handleSortDirection.bind(this);
     this.state = {
       values:{
       rating: '',
@@ -37,10 +35,11 @@ class Search extends Component {
   }
   } 
 }
-      
-handleFirstName(e) {
+
+//handles input from user in tekxtfield (first name)
+async handleFirstName(e) {
   let value = e.nativeEvent.text;
-  this.setState( prevState => ({ values : 
+  await this.setState( prevState => ({ values : 
        {...prevState.values, firstName: value
        }, 
      }) )
@@ -55,9 +54,10 @@ handleFirstName(e) {
   this.props.dispatch(SearchSuccess(object))
  }
 
- handleLastName(e) {
+//handles input from user in textfield (last name)
+ async handleLastName(e) {
   let value = e.nativeEvent.text;
-  this.setState( prevState => ({ values : 
+  await this.setState( prevState => ({ values : 
        {...prevState.values, lastName: value
        }
      }))
@@ -73,9 +73,6 @@ handleFirstName(e) {
  }
 
 
-
-
-
 render() {
   const state = this.state;
   if (this.props.pending===true){
@@ -84,34 +81,25 @@ render() {
     )}
 
   else{
-    
-
-
     return (
       <View style={styles.container}>
       
-      
+      <Image source={searchIcon} style={styles.AppLogo} />
       <TextInput  
-      style={styles.textFields}
+      
       placeholder="First Name" 
       value={this.state.values.firstName}
       onChange={(firstname)=>{this.handleFirstName(firstname)}}
       id="First Name"
-      style={{ height: 40, 
-      borderColor: 'gray', 
-      borderWidth: 1,
-      backgroundColor:'white' }}>
+      style={styles.searchText }>
       </TextInput>
       <TextInput  
-      style={styles.textFields}
+      
       placeholder="Last Name" 
       value={this.state.values.lastName}
       onChange={this.handleLastName}
       id="Last Name"
-      style={{ height: 40, 
-      borderColor: 'gray', 
-      borderWidth: 1,
-      backgroundColor:'white' }}>
+      style={styles.searchText}>
       </TextInput>
       
       </View>
@@ -128,21 +116,37 @@ render() {
 
    const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      display:'flex',
+      
       flexDirection:'row',
-      justifyContent:'space-evenly'
+      justifyContent:'space-around',
+      width:'100%',
+      paddingTop:20,
+      paddingBottom:20,
+      //flexGrow: 1,
+      
+      
     },
     AppLogo :{
-      height: 20,
-      width:20,
+      height: 40,
+      width:40,
       resizeMode: 'contain',
       marginTop:3,
-      //display: 'block'
+    },
+   
+  
+  
+    searchText:{
+      textAlign: 'center',
+      alignContent: 'center',
+      flex: 1,
+      height: 40,
+      color: 'black',
+      borderBottomColor: '#282c34',
+      borderBottomWidth: 1,
+      marginTop: 5,
+      marginBottom: 8
     },
     textFields: {
-     //color:'blue'
      
-
     },
   })

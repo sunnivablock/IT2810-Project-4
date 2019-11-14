@@ -26,7 +26,7 @@ export default function HomeScreen() {
         <Header/>
         <View style={styles.sContainer}>
           <View style={styles.searchBar}>
-          <Image source={searchIcon} style={styles.AppLogo} />
+            <Text style={styles.searchHeader}>SEARCH</Text>
             <Search/>
             <Initializer/>
           </View>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   },
   AppLogo :{
     height: 40,
-    width:40,
+    
     resizeMode: 'contain',
     marginTop:3,
     //display: 'block'
@@ -126,6 +126,12 @@ const styles = StyleSheet.create({
     color: 'white',
     lineHeight: 24,
     textAlign: 'center',
+  },
+  searchHeader:{
+    fontSize: 18,
+    lineHeight: 40,
+    fontWeight: '700',
+    letterSpacing: 2
   },
   tabBarInfoContainer: {
     position: 'absolute',
@@ -163,13 +169,18 @@ const styles = StyleSheet.create({
   searchBar: {
     flex: 1,
     display:'flex',
-    flexDirection:'row',
-    //width:600,
-    
+    flexDirection:'column',
+    width:'90%',
+    //border:''
+    borderRadius: 10,
+    borderBottomColor: '#282c34',
+    borderBottomWidth: 1,
     //height:30,
-    //padding:30,
-    backgroundColor:'white',
+    height:'100%',
+    marginTop:'7%',
+    backgroundColor: 'white', 
     alignItems:'center',
+    
   },
   sContainer:{
     display:'flex',

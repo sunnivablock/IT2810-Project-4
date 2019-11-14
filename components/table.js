@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, View, Text, ListItem, Button, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
-import { Table, Row, Rows } from 'react-native-table-component';
+import { StyleSheet, View, Text, Button, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
-import { bindActionCreators, dispatch } from 'redux';
-import fetchActorsAction from './fetchActors'
 import { FlatList } from 'react-native-gesture-handler';
 
 
@@ -27,6 +24,7 @@ class Table1 extends Component {
 
   }
  
+  //Updating. Used to display new page of celebreties 
   loadData(){
     let rows=[]
     this.props.actors.map(actor => {
@@ -37,6 +35,7 @@ class Table1 extends Component {
     this.setState({display:display})
   }
 
+  //Handles click on button for previous page with celebrities 
   buttonClickPrevPage(){
     let newFirstIndex=this.state.firstIndex-10
     let newLastIndex=newFirstIndex+10
@@ -52,6 +51,7 @@ class Table1 extends Component {
     }
   }
 
+//Handles click on button for next page of celebrities
   buttonClickNextPage(){
     let newFirstIndex=this.state.lastIndex
     let newLastIndex=newFirstIndex+10
@@ -83,6 +83,7 @@ class Table1 extends Component {
 
   render() {
     const state = this.state;
+    //returns an empty view in case redux is not up to date yet
     if (this.props.pending===true){
       return (
         <View></View>
@@ -97,6 +98,9 @@ class Table1 extends Component {
 
       return (
         <View>
+          <View style={styles.tableTop}>
+            <Text style={styles.tableTopText}>{ "RATING - NAVN" }</Text>
+            </View>
         <FlatList
           style={styles.container}
           data={display}
@@ -109,18 +113,20 @@ class Table1 extends Component {
           </TouchableWithoutFeedback>
      )}
         />
-        <View style = {styles.buttons}>
+        <View style = {styles.buttons} >
           <Button style={styles.prev}
           onPress={this.buttonClickPrevPage.bind(this) } 
           title="Previous page"
+          color='black'
           />
           <Button
           onPress={this.buttonClickNextPage.bind(this) } 
           title="Next page"
+          color='black'
           />
         </View>
         <View style={styles.inputContainer}>
-            <Text style={styles.subHeadline}>More information</Text>
+            <Text style={styles.subHeadline}>More Information</Text>
             <View>
               {this.state.activeActor.name !=='' ? <Text style={styles.infoText}>{this.state.activeActor.name+ " is a/an " + this.state.activeActor.profession + " and was born in " + this.state.activeActor.age}.</Text>
               : <Text style={styles.infoText}>Click on a person to display more details.</Text>}
@@ -141,13 +147,9 @@ const mapStateToProps = state => {
 }}
 
 
-/*const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchActors: fetchActorsAction,
-}, dispatch)*/
 
 export default connect(
   mapStateToProps,
-  //mapDispatchToProps
 )(Table1);
 
 const styles = StyleSheet.create({
@@ -165,8 +167,30 @@ const styles = StyleSheet.create({
   actor: {
     borderBottomColor:'#ccc',
     borderBottomWidth:1,
-    marginBottom:10
+    marginBottom:10,
+    borderBottomStartRadius:15,
+    borderBottomEndRadius:15,
   },
+  tableTop:{
+    borderBottomColor:'#ccc',
+    marginTop:50,
+    borderBottomStartRadius:10,
+    borderBottomEndRadius:10,
+    borderBottomWidth:2,
+    borderTopColor:'#ccc',
+    borderTopStartRadius:10,
+    borderTopEndRadius:10,
+    borderTopWidth:2,
+    marginBottom:5
+  },
+  tableTopText: { 
+    margin: 6 , 
+    color:'white',
+    fontSize:18,
+    padding:5,
+    marginLeft:21
+  },
+
   buttons:{
     flexDirection: 'row',
     justifyContent: 'space-between',
