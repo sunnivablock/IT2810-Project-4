@@ -193,14 +193,12 @@ const styles = StyleSheet.create({
   buttons:{
     flexDirection: 'row',
     justifyContent: 'space-between',
-    color: 'white',
   },
   buttonView: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   navButtons: {
-    color: 'white',
     fontSize: 18,
     fontWeight: '600',
   },
