@@ -10,7 +10,6 @@ import {
   StyleSheet,
   Text,
   Button,
-  TouchableOpacity,
   
 } from 'react-native';
 import Up from '../assets/images/Up.png'
